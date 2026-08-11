@@ -15,9 +15,7 @@ export const Footer = () => {
           
           {/* Brand Block */}
           <div className="col-span-1 md:col-span-5 pr-8">
-             <div className="h-12 w-32 bg-background border border-border flex items-center justify-center text-xs font-bold text-accent tracking-[0.2em] uppercase mb-8 shadow-lg">
-                GIF LOGO
-             </div>
+             <img src="/assets/wde_1/wde_1.gif" alt="We Do Effects" className="h-16 w-auto object-contain mb-8 mix-blend-screen" />
              <p className="text-foreground text-lg md:text-xl font-serif leading-relaxed mb-6">
                Nurtures and elevates your brand. Just as sunlight helps a plant grow.
              </p>

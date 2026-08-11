@@ -7,11 +7,9 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-6 md:px-12 flex h-20 items-center justify-between">
-        {/* Brand / Logo (Placeholder for GIF) */}
+        {/* Brand / Logo (Using the GIF) */}
         <Link href="/" className="flex items-center gap-2" aria-label="We Do Effects Home">
-          <div className="h-10 w-24 bg-surface-elevated animate-pulse rounded flex items-center justify-center text-[10px] text-muted tracking-widest uppercase border border-border">
-            GIF LOGO
-          </div>
+          <img src="/assets/wde_1/wde_1.gif" alt="We Do Effects" className="h-12 w-auto object-contain mix-blend-screen" />
         </Link>
 
         {/* Desktop Navigation */}
