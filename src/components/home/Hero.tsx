@@ -71,8 +71,8 @@ export const Hero = () => {
 
           <div className="relative w-full max-w-[700px] aspect-square flex items-center justify-center z-10">
             <img 
-               src="/assets/wde_1/wde_1.gif" 
-               alt="" 
+               src="/assets/wde_1/hero_visual.jpg" 
+               alt="Abstract organic growth concept" 
                className="w-full h-full object-contain relative z-10 drop-shadow-[0_0_60px_rgba(212,175,55,0.1)] mix-blend-screen"
                loading="eager"
             />
