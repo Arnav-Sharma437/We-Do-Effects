@@ -2,33 +2,56 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
 import { Button } from '@/components/ui/Button';
+import { ArrowRight } from 'lucide-react';
 
 export const FinalCTA = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <Section spacing="xl" className="bg-surface-elevated relative overflow-hidden">
-      {/* Background ambient glow */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px] pointer-events-none translate-x-1/3 translate-y-1/3" />
+    <Section spacing="none" className="bg-background relative overflow-hidden py-32 md:py-48 border-t border-border/20">
+      
+      {/* Cinematic Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] md:w-[80%] aspect-square bg-[radial-gradient(circle_at_center,_rgba(212,175,55,0.08)_0%,_transparent_60%)] pointer-events-none blur-3xl z-0" />
+      
+      {/* Subtle Particles */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+         <div className="absolute top-[30%] left-[30%] w-1.5 h-1.5 bg-accent/40 rounded-full blur-[1px]" />
+         <div className="absolute bottom-[40%] right-[25%] w-2 h-2 bg-accent/20 rounded-full blur-[1.5px]" />
+      </div>
 
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="max-w-3xl mx-auto text-center relative z-10"
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-5xl mx-auto text-center relative z-10 px-4 sm:px-6"
       >
-        <h2 className="text-4xl md:text-6xl font-serif text-foreground mb-6">Have a project in mind?</h2>
-        <p className="text-lg md:text-xl text-muted mb-10 leading-relaxed">
+        <span className="text-[11px] font-bold tracking-[0.3em] text-accent uppercase mb-8 block">
+          Let's Collaborate
+        </span>
+        
+        <h2 className="text-5xl md:text-7xl lg:text-[7rem] font-display font-bold uppercase tracking-tighter text-foreground mb-8 leading-[0.95]">
+          Have a project<br />
+          <span className="text-accent italic font-normal">in mind?</span>
+        </h2>
+        
+        <p className="text-[16px] md:text-[18px] text-muted mb-12 leading-relaxed max-w-2xl mx-auto font-sans">
           Tell us what you're trying to achieve. We'll help you define the next steps, timeline, and investment required to make it happen.
         </p>
         
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button size="lg" asChild>
-            <Link href="/contact">Get a Quote</Link>
+        <div className="flex flex-col sm:flex-row justify-center gap-6 w-full sm:w-auto">
+          <Button size="lg" asChild className="h-[52px] px-10 rounded-none text-[11px] tracking-widest font-bold bg-accent text-background border-none hover:bg-accent/90 transition-colors flex items-center justify-center">
+            <Link href="/contact">
+              GET A QUOTE <ArrowRight className="w-3.5 h-3.5 ml-2" />
+            </Link>
           </Button>
-          <Button size="lg" variant="outline" asChild>
-            <Link href="/contact">Talk to Us</Link>
+          <Button size="lg" variant="ghost" asChild className="h-[52px] px-10 rounded-none text-[11px] tracking-widest font-bold border border-border hover:border-foreground transition-colors flex items-center justify-center group">
+            <Link href="/contact">
+              TALK TO US <ArrowRight className="w-3.5 h-3.5 ml-2 opacity-60 group-hover:opacity-100 transition-opacity" />
+            </Link>
           </Button>
         </div>
       </motion.div>
