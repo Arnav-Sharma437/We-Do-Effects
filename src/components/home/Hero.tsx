@@ -69,7 +69,7 @@ export const Hero = () => {
              <div className="absolute bottom-[30%] left-[40%] w-1.5 h-1.5 bg-foreground/30 rounded-full blur-[1px]" />
           </div>
 
-          <div className="relative w-full max-w-[700px] aspect-square flex items-center justify-center z-10 lg:scale-110 lg:translate-x-8">
+          <div className="relative w-full max-w-[700px] aspect-square flex items-center justify-center z-10">
             <img 
                src="/assets/wde_1/wde_1.gif" 
                alt="" 
