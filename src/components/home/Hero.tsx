@@ -16,7 +16,7 @@ export const Hero = () => {
       <div className="absolute inset-0 bg-background pointer-events-none z-0" />
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }} />
 
-      <div className="w-full px-6 md:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center z-10 relative pt-24 pb-12">
+      <div className="mx-auto w-[94vw] max-w-[1600px] grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center z-10 relative pt-24 pb-12">
         
         {/* LEFT COLUMN: Typography (Approx 45%) */}
         <motion.div 
@@ -29,8 +29,8 @@ export const Hero = () => {
             Studio We Do Effects
           </span>
 
-          <h1 className="text-[3rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[5rem] font-serif uppercase font-bold leading-[0.9] tracking-tight text-foreground mix-blend-screen mb-6">
-            Nurtures &<br />Elevates<br />Your Brand
+          <h1 className="text-[3rem] md:text-[4rem] lg:text-[clamp(58px,5vw,86px)] font-serif uppercase font-bold leading-[0.88] tracking-tight text-foreground mix-blend-screen mb-6">
+            Nurtures &<br />Elevates<br />Your<br />Brand
           </h1>
           
           <p className="text-lg md:text-xl font-serif text-accent italic mb-8">

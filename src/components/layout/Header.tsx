@@ -6,30 +6,32 @@ import { Button } from '@/components/ui/Button';
 export const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto max-w-7xl px-6 md:px-12 flex h-20 items-center justify-between">
+      <div className="mx-auto w-[94vw] max-w-[1700px] flex h-20 items-center justify-between">
         {/* Brand / Logo (Using the GIF) */}
         <Link href="/" className="flex items-center gap-2" aria-label="We Do Effects Home">
-          <img src="/assets/wde_1/wde_1.gif" alt="We Do Effects" className="h-12 w-auto object-contain mix-blend-screen" />
+          <img src="/assets/wde_1/wde_1.gif" alt="We Do Effects" className="h-10 w-auto object-contain mix-blend-screen" />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          <ul className="flex items-center gap-6 text-sm font-medium tracking-wide">
-            {navigation.primary.map((item) => (
-              <li key={item.name}>
-                <Link href={item.href} className="text-muted hover:text-foreground transition-colors">
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <nav className="hidden md:flex items-center gap-8 lg:gap-12 absolute left-1/2 -translate-x-1/2">
+          {navigation.primary.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-[15px] font-medium tracking-wide text-foreground/80 hover:text-accent transition-colors"
+            >
+              {item.name}
+            </Link>
+          ))}
         </nav>
 
-        {/* CTA & Mobile Toggle */}
+        {/* Desktop CTA & Mobile Toggle */}
         <div className="flex items-center gap-4">
-          <Button variant="default" size="sm" asChild className="hidden md:inline-flex">
-            <Link href="/contact">Get a Quote</Link>
-          </Button>
+          <div className="hidden md:flex items-center gap-4">
+            <Button asChild className="h-11 px-8 rounded-none text-xs font-bold uppercase tracking-widest bg-foreground text-background hover:bg-foreground/90 transition-colors">
+              <Link href="/contact">Get a Quote</Link>
+            </Button>
+          </div>
           <button className="md:hidden text-foreground p-2" aria-label="Menu">
             <span className="block w-6 h-0.5 bg-current mb-1.5"></span>
             <span className="block w-6 h-0.5 bg-current"></span>
