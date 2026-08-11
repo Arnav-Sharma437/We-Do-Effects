@@ -4,27 +4,35 @@ import { navigation } from '@/data/navigation';
 
 export const Footer = () => {
   return (
-    <footer className="bg-surface-elevated border-t border-border mt-auto">
-      <div className="mx-auto max-w-7xl px-6 md:px-12 py-16 lg:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-8">
+    <footer className="bg-surface-elevated border-t border-border mt-auto overflow-hidden relative">
+      {/* Large subtle background typography */}
+      <div className="absolute -bottom-10 -right-10 text-[10rem] md:text-[15rem] font-display font-bold text-background opacity-20 select-none pointer-events-none leading-none tracking-tighter uppercase z-0">
+        WDE.
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 py-24">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 lg:gap-8">
           
           {/* Brand Block */}
-          <div className="col-span-1 md:col-span-1">
-             <div className="h-10 w-24 bg-surface animate-pulse rounded mb-6 flex items-center justify-center text-[10px] text-muted tracking-widest uppercase border border-border">
+          <div className="col-span-1 md:col-span-5 pr-8">
+             <div className="h-12 w-32 bg-background border border-border flex items-center justify-center text-xs font-bold text-accent tracking-[0.2em] uppercase mb-8 shadow-lg">
                 GIF LOGO
              </div>
-             <p className="text-muted text-sm max-w-xs leading-relaxed">
+             <p className="text-foreground text-lg md:text-xl font-serif leading-relaxed mb-6">
+               Nurtures and elevates your brand. Just as sunlight helps a plant grow.
+             </p>
+             <p className="text-muted text-sm leading-relaxed max-w-sm">
                An experienced creative agency that understands what you need and makes the next step obvious.
              </p>
           </div>
 
           {/* Company Links */}
-          <div>
-            <h3 className="font-serif text-lg text-foreground mb-6">Company</h3>
-            <ul className="space-y-4 text-sm text-muted">
+          <div className="md:col-span-2">
+            <h3 className="font-display text-xl font-bold uppercase tracking-widest text-foreground mb-8">Company</h3>
+            <ul className="space-y-4 text-sm font-medium tracking-wide text-muted">
               {navigation.primary.map((item) => (
                 <li key={item.name}>
-                  <Link href={item.href} className="hover:text-foreground transition-colors">
+                  <Link href={item.href} className="hover:text-accent transition-colors">
                     {item.name}
                   </Link>
                 </li>
@@ -33,12 +41,12 @@ export const Footer = () => {
           </div>
 
           {/* Services Links */}
-          <div>
-            <h3 className="font-serif text-lg text-foreground mb-6">Services</h3>
-            <ul className="space-y-4 text-sm text-muted">
+          <div className="md:col-span-2">
+            <h3 className="font-display text-xl font-bold uppercase tracking-widest text-foreground mb-8">Services</h3>
+            <ul className="space-y-4 text-sm font-medium tracking-wide text-muted">
               {navigation.services.map((item) => (
                 <li key={item.name}>
-                  <Link href={item.href} className="hover:text-foreground transition-colors">
+                  <Link href={item.href} className="hover:text-accent transition-colors">
                     {item.name}
                   </Link>
                 </li>
@@ -47,31 +55,31 @@ export const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div>
-            <h3 className="font-serif text-lg text-foreground mb-6">Contact</h3>
-            <ul className="space-y-4 text-sm text-muted">
+          <div className="md:col-span-3">
+            <h3 className="font-display text-xl font-bold uppercase tracking-widest text-foreground mb-8">Contact</h3>
+            <ul className="space-y-6 text-sm text-muted">
               <li>
-                <span className="block text-xs uppercase tracking-widest mb-1">Phone</span>
-                <a href="tel:#" className="hover:text-foreground transition-colors">[VERIFIED PHONE]</a>
+                <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-2">Phone</span>
+                <a href="tel:#" className="text-base font-serif hover:text-foreground transition-colors">[VERIFIED PHONE]</a>
               </li>
               <li>
-                <span className="block text-xs uppercase tracking-widest mb-1">Email</span>
-                <a href="mailto:#" className="hover:text-foreground transition-colors">[VERIFIED EMAIL]</a>
+                <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-2">Email</span>
+                <a href="mailto:#" className="text-base font-serif hover:text-foreground transition-colors">[VERIFIED EMAIL]</a>
               </li>
               <li>
-                <span className="block text-xs uppercase tracking-widest mb-1">Address</span>
-                <span className="hover:text-foreground transition-colors">[VERIFIED ADDRESS]</span>
+                <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-2">Address</span>
+                <span className="text-base font-serif hover:text-foreground transition-colors block leading-relaxed">[VERIFIED ADDRESS]</span>
               </li>
             </ul>
           </div>
           
         </div>
         
-        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted">
-          <p>&copy; {new Date().getFullYear()} We Do Effects. All rights reserved.</p>
-          <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+        <div className="mt-24 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-muted">
+          <p>&copy; {new Date().getFullYear()} WE DO EFFECTS. ALL RIGHTS RESERVED.</p>
+          <div className="flex gap-8">
+            <Link href="/privacy" className="hover:text-accent transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-accent transition-colors">Terms</Link>
           </div>
         </div>
       </div>

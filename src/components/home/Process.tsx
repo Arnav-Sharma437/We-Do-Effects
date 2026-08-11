@@ -5,46 +5,54 @@ import { motion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
 
 const steps = [
-  { num: '01', title: 'Discover', desc: 'Understanding your goals, audience, and challenges.' },
-  { num: '02', title: 'Strategy', desc: 'Defining the creative and technical roadmap.' },
-  { num: '03', title: 'Create', desc: 'Executing the design, production, or development.' },
-  { num: '04', title: 'Launch', desc: 'Rolling out the solution to the market.' },
-  { num: '05', title: 'Grow', desc: 'Monitoring, refining, and scaling the results.' }
+  { num: '01', title: 'DISCOVER', desc: 'Understanding your goals, audience, and challenges.' },
+  { num: '02', title: 'STRATEGY', desc: 'Defining the creative and technical roadmap.' },
+  { num: '03', title: 'CREATE', desc: 'Executing the design, production, or development.' },
+  { num: '04', title: 'LAUNCH', desc: 'Rolling out the solution to the market.' },
+  { num: '05', title: 'GROW', desc: 'Monitoring, refining, and scaling the results.' }
 ];
 
 export const Process = () => {
   return (
-    <Section spacing="xl">
-      <div className="flex flex-col md:flex-row gap-12 lg:gap-24">
-        <div className="md:w-1/3">
-          <div className="sticky top-32">
-            <h2 className="text-sm font-medium tracking-[0.2em] text-accent uppercase mb-4">Our Approach</h2>
-            <h3 className="text-4xl md:text-5xl font-serif text-foreground mb-6">How we work together.</h3>
-            <p className="text-muted leading-relaxed">
-              We follow a structured methodology that reduces uncertainty and ensures alignment from initial concept to final delivery.
-            </p>
-          </div>
+    <Section spacing="xl" className="bg-background relative">
+      <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 items-start">
+        
+        {/* Sticky Header */}
+        <div className="lg:w-1/3 lg:sticky lg:top-40">
+          <h2 className="text-xs font-bold tracking-[0.3em] text-accent uppercase mb-6">Our Approach</h2>
+          <h3 className="text-5xl md:text-7xl font-display font-bold uppercase tracking-tighter text-foreground mb-8 leading-none">
+            How we<br />work.
+          </h3>
+          <p className="text-muted leading-relaxed text-lg">
+            We follow a structured methodology that reduces uncertainty and ensures alignment from initial concept to final delivery.
+          </p>
         </div>
 
-        <div className="md:w-2/3 flex flex-col gap-0 border-l border-border/50 pl-8 md:pl-16 relative">
+        {/* Timeline */}
+        <div className="lg:w-2/3 flex flex-col w-full relative pt-12">
+          {/* Vertical Line */}
+          <div className="absolute left-[39px] md:left-[79px] top-0 bottom-0 w-[1px] bg-border" />
+          
           {steps.map((step, index) => (
             <motion.div 
               key={step.num}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="py-12 first:pt-0 last:pb-0 relative group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              className="relative flex items-center gap-12 md:gap-24 mb-32 last:mb-0 group"
             >
-              {/* Timeline dot */}
-              <div className="absolute left-[-33px] md:left-[-65px] top-12 first:top-0 w-2 h-2 rounded-full bg-border group-hover:bg-accent transition-colors" />
+              {/* Massive Number */}
+              <div className="relative z-10 w-20 md:w-40 flex-shrink-0 bg-background py-8">
+                <span className="text-5xl md:text-8xl font-display font-bold text-surface-elevated group-hover:text-accent transition-colors duration-500">
+                  {step.num}
+                </span>
+              </div>
               
-              <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-8">
-                <span className="text-2xl font-serif text-muted/50 group-hover:text-accent transition-colors">{step.num}</span>
-                <div>
-                  <h4 className="text-2xl font-serif text-foreground mb-3">{step.title}</h4>
-                  <p className="text-muted leading-relaxed">{step.desc}</p>
-                </div>
+              {/* Content */}
+              <div className="flex flex-col gap-4">
+                <h4 className="text-3xl md:text-5xl font-display font-bold text-foreground uppercase tracking-tight">{step.title}</h4>
+                <p className="text-muted text-lg leading-relaxed max-w-sm">{step.desc}</p>
               </div>
             </motion.div>
           ))}

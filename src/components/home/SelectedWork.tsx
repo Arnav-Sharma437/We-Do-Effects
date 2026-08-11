@@ -2,92 +2,88 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
-import { Button } from '@/components/ui/Button';
+import { ArrowRight } from 'lucide-react';
 
-// Temporary structured placeholder data reflecting the exact requirement:
-// SERVICE → PROJECT → RESULT → TESTIMONIAL → CTA
 const featuredWork = [
   {
     id: 'project-1',
-    client: '[Project / Client Name]',
-    service: 'Branding & Website Design',
+    client: '[Project Alpha]',
+    service: 'Branding & Web Design',
     context: '[Brief challenge/context placeholder]',
-    result: '[Verified outcome placeholder]',
-    imagePlaceholder: 'Project Alpha'
   },
   {
     id: 'project-2',
-    client: '[Project / Client Name]',
+    client: '[Project Beta]',
     service: 'Video Production',
     context: '[Brief challenge/context placeholder]',
-    result: '[Verified outcome placeholder]',
-    imagePlaceholder: 'Project Beta'
   }
 ];
 
 export const SelectedWork = () => {
   return (
-    <Section spacing="xl" className="bg-surface-elevated">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24">
-        <div className="max-w-xl">
-          <h2 className="text-sm font-medium tracking-[0.2em] text-accent uppercase mb-4">Selected Work</h2>
-          <h3 className="text-4xl md:text-5xl font-serif text-foreground">Proof in execution.</h3>
-        </div>
-        <Button variant="outline" asChild className="hidden md:inline-flex">
-          <Link href="/work">View All Cases</Link>
-        </Button>
+    <Section spacing="xl" className="bg-surface relative overflow-hidden">
+      <div className="flex flex-col items-start mb-24 md:mb-32">
+        <h2 className="text-xs font-bold tracking-[0.3em] text-accent uppercase mb-6">Selected Work</h2>
+        <h3 className="text-6xl md:text-[8rem] font-display font-bold uppercase tracking-tighter text-foreground leading-none">
+          Proof In<br />Execution
+        </h3>
       </div>
 
-      <div className="flex flex-col gap-16 md:gap-32">
+      <div className="flex flex-col gap-24 md:gap-48">
         {featuredWork.map((project, index) => (
           <motion.div 
             key={project.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-20%" }}
+            transition={{ duration: 1 }}
             className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 md:gap-16 items-center`}
           >
-            {/* Image Placeholder */}
-            <div className="w-full md:w-3/5 aspect-[4/3] md:aspect-[16/10] bg-surface border border-border flex items-center justify-center overflow-hidden relative group">
-              <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-              <div className="text-muted tracking-widest uppercase text-xs animate-pulse">
-                [IMAGE: {project.imagePlaceholder}]
+            {/* Massive Image Placeholder */}
+            <div className="w-full md:w-[65%] aspect-[4/5] md:aspect-video bg-background relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-surface-elevated to-surface flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                <div className="text-border font-display text-4xl md:text-8xl font-bold uppercase tracking-tighter rotate-[-10deg] opacity-20">
+                  {project.id}
+                </div>
+              </div>
+              {/* Overlay for interaction */}
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-center justify-center">
+                <div className="bg-accent text-background text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  View Project
+                </div>
               </div>
             </div>
 
-            {/* Project Content */}
-            <div className="w-full md:w-2/5 flex flex-col gap-6">
-              <div>
-                <span className="text-xs font-medium tracking-[0.2em] text-accent uppercase block mb-3">{project.service}</span>
-                <h4 className="text-3xl font-serif text-foreground mb-4">{project.client}</h4>
-                <p className="text-sm text-muted leading-relaxed mb-4">
-                  <span className="font-medium text-foreground/80">Challenge:</span> {project.context}
-                </p>
-                <p className="text-sm text-muted leading-relaxed">
-                  <span className="font-medium text-foreground/80">Result:</span> {project.result}
-                </p>
-              </div>
-              
-              <div className="pt-6 border-t border-border/50">
-                <Link 
-                  href={`/work/${project.id}`}
-                  className="inline-flex items-center text-xs font-medium uppercase tracking-widest text-foreground hover:text-accent transition-colors"
-                >
-                  View Case Study
-                </Link>
-              </div>
+            {/* Project Context */}
+            <div className={`w-full md:w-[35%] flex flex-col ${index % 2 === 1 ? 'md:items-end md:text-right' : 'md:items-start text-left'}`}>
+              <div className="w-12 h-1 bg-accent mb-8" />
+              <span className="text-xs font-bold tracking-[0.2em] text-muted uppercase block mb-4">{project.service}</span>
+              <h4 className="text-4xl md:text-5xl font-display font-bold uppercase text-foreground mb-6 leading-none tracking-tight">{project.client}</h4>
+              {/* Keeping structural readiness without exposing fake results */}
+              <p className="text-muted text-sm leading-relaxed mb-8 max-w-sm">
+                A brief overview of the challenge and strategy will be inserted here when verified project data is supplied.
+              </p>
+              <Link 
+                href={`/work/${project.id}`}
+                className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.15em] text-foreground hover:text-accent transition-colors group"
+              >
+                <span>Read Case Study</span>
+                <ArrowRight className={`w-4 h-4 transition-transform ${index % 2 === 1 ? 'rotate-180 group-hover:-translate-x-2' : 'group-hover:translate-x-2'}`} />
+              </Link>
             </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="mt-16 md:hidden">
-        <Button variant="outline" asChild className="w-full">
-          <Link href="/work">View All Cases</Link>
-        </Button>
+      <div className="mt-32 text-center">
+        <Link 
+          href="/work"
+          className="inline-block text-2xl md:text-4xl font-serif text-foreground hover:text-accent transition-colors border-b border-accent pb-2"
+        >
+          View all our selected work.
+        </Link>
       </div>
     </Section>
   );
