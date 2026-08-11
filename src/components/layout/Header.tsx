@@ -2,27 +2,26 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { navigation } from '@/data/navigation';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto w-[94vw] max-w-[1800px] flex h-[88px] items-center justify-between">
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border/20">
+      <div className="mx-auto w-[92vw] max-w-[1600px] flex h-20 items-center justify-between">
         {/* Brand / Logo */}
         <Link href="/" className="flex items-center" aria-label="We Do Effects Home">
-          <img src="/assets/wde_1/wde_1.gif" alt="We Do Effects" className="h-16 w-auto object-contain mix-blend-screen" />
+          <img src="/assets/wde_1/wde_1.gif" alt="We Do Effects" className="h-12 w-auto object-contain" />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+        <nav className="hidden md:flex items-center gap-8 lg:gap-10 absolute left-1/2 -translate-x-1/2">
           {navigation.primary.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-[15px] font-medium tracking-wide text-foreground/90 hover:text-accent transition-colors"
+              className="text-[14px] font-semibold text-foreground hover:text-accent transition-colors"
             >
               {item.name}
             </Link>
@@ -31,10 +30,10 @@ export const Header = () => {
 
         {/* Desktop CTA & Mobile Toggle */}
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-4">
-            <Button asChild className="h-12 px-8 rounded-none text-xs font-bold uppercase tracking-widest bg-foreground text-background hover:bg-foreground/90 transition-colors flex items-center gap-2">
+          <div className="hidden md:flex items-center">
+            <Button asChild className="h-10 px-6 rounded-none text-[11px] font-bold uppercase tracking-widest bg-foreground text-background hover:bg-foreground/90 transition-colors flex items-center gap-2">
               <Link href="/contact">
-                Get a Quote <ArrowRight className="w-4 h-4 ml-2" />
+                Get a Quote <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </Link>
             </Button>
           </div>
