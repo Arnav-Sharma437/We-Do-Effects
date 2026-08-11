@@ -52,27 +52,17 @@ export const Hero = () => {
 
         {/* Major Brand Visual (GIF) */}
         <motion.div 
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, filter: 'blur(0px)' }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, filter: 'blur(10px)', scale: 0.95 }}
+          animate={{ opacity: 1, filter: 'blur(0px)', scale: 1 }}
           transition={{ duration: 1.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-5 relative w-full max-w-[500px] aspect-square mx-auto lg:scale-125 lg:-ml-12 lg:mt-0 mt-16 z-10 flex items-center justify-center"
+          className="lg:col-span-5 relative w-full max-w-[600px] aspect-square mx-auto lg:scale-125 lg:-ml-8 lg:mt-0 mt-12 z-10 flex items-center justify-center pointer-events-none"
         >
-           {/* The GIF Asset container */}
-           <div className="relative w-full h-full flex items-center justify-center bg-surface-elevated rounded-full overflow-hidden shadow-[0_0_120px_rgba(212,175,55,0.08)] border border-border/30 group">
-             {/* Fallback styling shown if image fails to load or before it's dropped in */}
-             <div className="absolute inset-0 flex flex-col items-center justify-center p-8 opacity-50 group-hover:opacity-100 transition-opacity">
-               <div className="text-accent animate-pulse font-display text-2xl uppercase tracking-widest mb-4">Awaiting GIF</div>
-               <p className="text-[10px] text-muted font-mono bg-background/50 px-3 py-1 rounded border border-border/50">/public/assets/logo.gif</p>
-             </div>
-             
-             {/* The actual image tag configured for the asset */}
+           <div className="relative w-full h-full flex items-center justify-center drop-shadow-[0_0_80px_rgba(212,175,55,0.15)]">
              <img 
-                src="/assets/logo.gif" 
-                alt="We Do Effects Brand Graphic" 
-                className="w-full h-full object-contain relative z-10 mix-blend-screen"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
+                src="/assets/wde_1/wde_1.gif" 
+                alt="" 
+                className="w-full h-full object-contain relative z-10"
+                loading="eager"
              />
            </div>
         </motion.div>
