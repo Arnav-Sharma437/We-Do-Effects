@@ -18,7 +18,7 @@ export const ServiceSolutions = () => {
       {/* Refined Ghost Typography - Accessible and intentional */}
       <div 
         aria-hidden="true" 
-        className="absolute -top-16 lg:-top-24 left-0 text-[6rem] md:text-[10rem] lg:text-[14rem] font-display font-bold text-foreground opacity-[0.03] select-none pointer-events-none leading-none tracking-tighter uppercase whitespace-nowrap overflow-hidden w-full z-0"
+        className="absolute -top-16 lg:-top-24 left-0 text-[6rem] md:text-[10rem] lg:text-[14rem] font-display font-bold text-foreground opacity-10 select-none pointer-events-none leading-none tracking-tighter uppercase whitespace-nowrap overflow-hidden w-full z-0"
       >
         {title}
       </div>

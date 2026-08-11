@@ -40,10 +40,10 @@ export const Process = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="relative flex items-center gap-12 md:gap-24 mb-32 last:mb-0 group"
+              className="relative flex items-center gap-12 md:gap-24 mb-16 md:mb-20 last:mb-0 group"
             >
               {/* Massive Number */}
-              <div className="relative z-10 w-20 md:w-40 flex-shrink-0 bg-background py-8">
+              <div className="relative z-10 w-20 md:w-40 flex-shrink-0 bg-background py-4">
                 <span className="text-5xl md:text-8xl font-display font-bold text-surface-elevated group-hover:text-accent transition-colors duration-500">
                   {step.num}
                 </span>
