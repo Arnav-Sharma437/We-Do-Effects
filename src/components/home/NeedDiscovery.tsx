@@ -35,7 +35,7 @@ const needs = [
 
 export const NeedDiscovery = () => {
   return (
-    <Section spacing="xl" className="bg-background relative">
+    <Section spacing="xl" className="bg-surface-elevated relative">
       <div className="mb-20 flex flex-col items-center text-center">
         <h2 className="text-xs font-bold tracking-[0.3em] text-accent uppercase mb-6">Start Here</h2>
         <h3 className="text-5xl md:text-7xl font-display font-bold uppercase tracking-tighter text-foreground max-w-3xl leading-[0.9]">

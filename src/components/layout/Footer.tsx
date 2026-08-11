@@ -4,7 +4,7 @@ import { navigation } from '@/data/navigation';
 
 export const Footer = () => {
   return (
-    <footer className="bg-surface-elevated border-t border-border mt-auto overflow-hidden relative">
+    <footer className="bg-background border-t border-border mt-auto overflow-hidden relative">
       {/* Large subtle background typography */}
       <div className="absolute -bottom-10 -right-10 text-[10rem] md:text-[15rem] font-display font-bold text-background opacity-20 select-none pointer-events-none leading-none tracking-tighter uppercase z-0">
         WDE.

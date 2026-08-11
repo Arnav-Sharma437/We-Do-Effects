@@ -5,7 +5,7 @@ import { Section } from '@/components/layout/Section';
 
 export const Trust = () => {
   return (
-    <Section spacing="xl" className="bg-background">
+    <Section spacing="xl" className="bg-surface relative border-t border-border/50">
       {/* Testimonials are structurally hidden until verified content is available to avoid exposing fake quotes */}
       <div className="hidden">
         {/* Testimonial component ready for future use */}

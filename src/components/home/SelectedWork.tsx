@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
 import { ArrowRight } from 'lucide-react';
 
@@ -22,67 +22,72 @@ const featuredWork = [
 ];
 
 export const SelectedWork = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <Section spacing="xl" className="bg-surface relative overflow-hidden">
+    <Section spacing="xl" className="bg-surface relative overflow-hidden border-y border-border/50">
       <div className="flex flex-col items-start mb-24 md:mb-32">
         <h2 className="text-xs font-bold tracking-[0.3em] text-accent uppercase mb-6">Selected Work</h2>
-        <h3 className="text-6xl md:text-[8rem] font-display font-bold uppercase tracking-tighter text-foreground leading-none">
+        <h3 className="text-[4rem] md:text-[8rem] font-display font-bold uppercase tracking-tighter text-foreground leading-[0.85]">
           Proof In<br />Execution
         </h3>
       </div>
 
-      <div className="flex flex-col gap-24 md:gap-48">
+      <div className="flex flex-col gap-24 md:gap-40">
         {featuredWork.map((project, index) => (
           <motion.div 
             key={project.id}
-            initial={{ opacity: 0 }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 1 }}
-            className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 md:gap-16 items-center`}
+            className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-24 items-center group`}
           >
             {/* Massive Image Placeholder */}
-            <div className="w-full md:w-[65%] aspect-[4/5] md:aspect-video bg-background relative overflow-hidden group">
+            <div className="w-full lg:w-[60%] aspect-[4/5] md:aspect-video bg-background relative overflow-hidden border border-border/30">
               <div className="absolute inset-0 bg-gradient-to-tr from-surface-elevated to-surface flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
-                <div className="text-border font-display text-4xl md:text-8xl font-bold uppercase tracking-tighter rotate-[-10deg] opacity-20">
+                <div className="text-border font-display text-5xl md:text-8xl font-bold uppercase tracking-tighter -rotate-12 opacity-30 group-hover:scale-110 transition-transform duration-700">
                   {project.id}
                 </div>
               </div>
-              {/* Overlay for interaction */}
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-center justify-center">
-                <div className="bg-accent text-background text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+              
+              {/* Interaction Overlay */}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-center justify-center">
+                <div className="bg-accent text-background text-xs font-bold uppercase tracking-[0.2em] px-8 py-4 rounded-full translate-y-8 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
                   View Project
                 </div>
               </div>
             </div>
 
             {/* Project Context */}
-            <div className={`w-full md:w-[35%] flex flex-col ${index % 2 === 1 ? 'md:items-end md:text-right' : 'md:items-start text-left'}`}>
-              <div className="w-12 h-1 bg-accent mb-8" />
-              <span className="text-xs font-bold tracking-[0.2em] text-muted uppercase block mb-4">{project.service}</span>
-              <h4 className="text-4xl md:text-5xl font-display font-bold uppercase text-foreground mb-6 leading-none tracking-tight">{project.client}</h4>
-              {/* Keeping structural readiness without exposing fake results */}
-              <p className="text-muted text-sm leading-relaxed mb-8 max-w-sm">
+            <div className={`w-full lg:w-[40%] flex flex-col ${index % 2 === 1 ? 'lg:items-end lg:text-right' : 'lg:items-start text-left'} z-20`}>
+              <div className="w-16 h-[2px] bg-accent mb-8" />
+              <span className="text-xs font-bold tracking-[0.3em] text-accent uppercase block mb-4">{project.service}</span>
+              <h4 className="text-5xl md:text-6xl font-display font-bold uppercase text-foreground mb-6 leading-none tracking-tight">{project.client}</h4>
+              
+              <p className="text-muted text-base leading-relaxed mb-10 max-w-sm">
+                <span className="text-foreground font-medium block mb-2">Context:</span>
                 A brief overview of the challenge and strategy will be inserted here when verified project data is supplied.
               </p>
+              
               <Link 
                 href={`/work/${project.id}`}
-                className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.15em] text-foreground hover:text-accent transition-colors group"
+                className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-foreground hover:text-accent transition-colors"
               >
                 <span>Read Case Study</span>
-                <ArrowRight className={`w-4 h-4 transition-transform ${index % 2 === 1 ? 'rotate-180 group-hover:-translate-x-2' : 'group-hover:translate-x-2'}`} />
+                <ArrowRight className={`w-4 h-4 transition-transform ${index % 2 === 1 ? 'rotate-180 lg:group-hover:-translate-x-3 group-hover:translate-x-3' : 'group-hover:translate-x-3'}`} />
               </Link>
             </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="mt-32 text-center">
+      <div className="mt-40 text-center relative z-10">
         <Link 
           href="/work"
-          className="inline-block text-2xl md:text-4xl font-serif text-foreground hover:text-accent transition-colors border-b border-accent pb-2"
+          className="inline-flex items-center justify-center text-xl md:text-3xl font-serif text-foreground hover:text-accent transition-colors border-b border-accent pb-2"
         >
-          View all our selected work.
+          View all selected work
         </Link>
       </div>
     </Section>
