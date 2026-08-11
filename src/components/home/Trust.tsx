@@ -36,7 +36,7 @@ export const Trust = () => {
           {clients.map((client, idx) => (
             <div 
               key={`static-${idx}`} 
-              className="aspect-[2/1] bg-background border border-border/40 flex items-center justify-center p-6 md:p-8"
+              className="aspect-[2/1] bg-background border border-border/40 flex items-center justify-center p-4 md:p-6"
               aria-label={client.name}
             >
               <img 
@@ -68,7 +68,7 @@ export const Trust = () => {
             {marqueeLogos.map((client, idx) => (
               <div 
                 key={`marquee-${idx}`} 
-                className="w-[200px] md:w-[280px] lg:w-[320px] aspect-[2/1] bg-background border border-border/30 flex-shrink-0 flex items-center justify-center p-6 md:p-8 hover:border-border/80 transition-colors"
+                className="w-[240px] md:w-[360px] lg:w-[420px] aspect-[2/1] bg-background border border-border/30 flex-shrink-0 flex items-center justify-center p-5 md:p-8 hover:border-border/80 transition-colors"
                 aria-label={client.name}
               >
                 <img 
