@@ -32,7 +32,7 @@ export const Header = () => {
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center">
             <Button asChild className="h-10 px-6 rounded-none text-[11px] font-bold uppercase tracking-widest bg-foreground text-background hover:bg-foreground/90 transition-colors flex items-center gap-2">
-              <Link href="/contact">
+              <Link href="/book">
                 Get a Quote <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </Link>
             </Button>

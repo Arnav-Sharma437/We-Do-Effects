@@ -5,13 +5,21 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
 import { Button } from '@/components/ui/Button';
+import { packages } from '@/data/pricing';
+import { formatGbp } from '@/lib/pricing';
 
-const previewPrices = [
-  { service: 'Branding', price: 'To be confirmed' },
-  { service: 'Website Design', price: 'To be confirmed' },
-  { service: 'Digital Marketing', price: 'To be confirmed' },
-  { service: 'Video Production', price: 'To be confirmed' },
-];
+const previewIds = ['footages', 'informative', 'stories', 'podcast'] as const;
+
+const previewPrices = previewIds.map((id) => {
+  const pkg = packages.find((p) => p.id === id)!;
+  const price =
+    pkg.basePrice === null
+      ? 'TBD / POA'
+      : pkg.fromPrice
+        ? `From ${formatGbp(pkg.basePrice)}`
+        : `From ${formatGbp(pkg.basePrice)}`;
+  return { service: pkg.name, price };
+});
 
 export const PricingPreview = () => {
   return (
@@ -29,11 +37,11 @@ export const PricingPreview = () => {
             What should you expect to invest?
           </h3>
           <p className="text-lg text-muted mb-12 leading-relaxed max-w-md">
-            Every project is unique, but we believe in transparency. 
-            Our pricing is structured to deliver measurable value and premium quality without surprises.
+            Build a live quote with packages, extras, and reel volume pricing — then send an enquiry
+            with your deposit estimate.
           </p>
           <Button size="lg" asChild className="h-14 px-10 text-xs tracking-[0.2em] font-bold bg-foreground text-background hover:bg-foreground/90">
-            <Link href="/pricing">VIEW ALL PRICING</Link>
+            <Link href="/pricing">OPEN PRICING CALCULATOR</Link>
           </Button>
         </div>
 
@@ -44,7 +52,7 @@ export const PricingPreview = () => {
             <ul className="space-y-6">
               {previewPrices.map((item, index) => (
                 <motion.li 
-                  key={index}
+                  key={item.service}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
