@@ -6,6 +6,7 @@ import { NeedDiscovery } from '@/components/home/NeedDiscovery';
 import { ServiceSolutions } from '@/components/home/ServiceSolutions';
 import { SelectedWork } from '@/components/home/SelectedWork';
 import { Process } from '@/components/home/Process';
+import { InstagramReels } from '@/components/home/InstagramReels';
 import { PricingPreview } from '@/components/home/PricingPreview';
 import { Trust } from '@/components/home/Trust';
 import { FinalCTA } from '@/components/home/FinalCTA';
@@ -29,6 +30,9 @@ export default function Home() {
         
         {/* 05 - Process */}
         <Process />
+        
+        {/* 05.5 - Instagram Reels Showcase */}
+        <InstagramReels />
         
         {/* 06 - Pricing Preview */}
         <PricingPreview />
