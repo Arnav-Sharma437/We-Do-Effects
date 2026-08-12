@@ -125,92 +125,104 @@ export const InstagramReels = () => {
             ))}
           </div>
 
-          {/* Carousel Controls */}
+          {/* Carousel Controls (Only visible when ALL filter is active) */}
           <div className="hidden md:flex items-center gap-4">
-            <button 
-              onClick={scrollLeft}
-              className="w-12 h-12 rounded-full border border-border/30 flex items-center justify-center text-muted hover:border-accent hover:text-accent transition-colors"
-              aria-label="Previous posts"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button 
-              onClick={scrollRight}
-              className="w-12 h-12 rounded-full border border-border/30 flex items-center justify-center text-muted hover:border-accent hover:text-accent transition-colors"
-              aria-label="Next posts"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+            {activeFilter === 'all' && (
+              <>
+                <button 
+                  onClick={scrollLeft}
+                  className="w-12 h-12 rounded-full border border-border/30 flex items-center justify-center text-muted hover:border-accent hover:text-accent transition-colors"
+                  aria-label="Previous posts"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button 
+                  onClick={scrollRight}
+                  className="w-12 h-12 rounded-full border border-border/30 flex items-center justify-center text-muted hover:border-accent hover:text-accent transition-colors"
+                  aria-label="Next posts"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Carousel Container */}
+      {/* Content Container: Carousel for 'ALL', Grid for specific categories */}
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative">
         <div 
           ref={carouselRef}
-          className="flex overflow-x-auto gap-6 md:gap-8 pb-8 snap-x snap-mandatory scrollbar-hide" 
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className={
+            activeFilter === 'all' 
+              ? "flex overflow-x-auto gap-6 md:gap-8 pb-8 snap-x snap-mandatory scrollbar-hide" 
+              : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 pb-8"
+          }
+          style={activeFilter === 'all' ? { scrollbarWidth: 'none', msOverflowStyle: 'none' } : {}}
         >
           
           <AnimatePresence mode="popLayout">
             {filteredPosts.map((post) => (
-              <motion.a
-                href={post.url}
-                target="_blank"
-                rel="noopener noreferrer"
+              <motion.div
                 layout
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
                 key={post.id}
-                className="relative flex-shrink-0 w-[300px] md:w-[350px] lg:w-[400px] aspect-[4/5] bg-surface-elevated border border-border/20 rounded-lg overflow-hidden group snap-center block"
+                className={`relative flex-shrink-0 aspect-[4/5] bg-surface-elevated border border-border/20 rounded-lg overflow-hidden group snap-center ${
+                  activeFilter === 'all' ? 'w-[300px] md:w-[350px] lg:w-[400px]' : 'w-full'
+                }`}
               >
                 
-                {/* Cinematic Background Gradient (Placeholder for media) */}
-                <div className="absolute inset-0 bg-gradient-to-br from-surface to-background group-hover:scale-105 transition-transform duration-700 ease-out z-0" />
-                
-                {/* Dark Overlay for Text Readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
-
-                {/* Top Bar: Label & Icon */}
-                <div className="absolute top-6 left-6 right-6 flex justify-between items-start z-20">
-                  <span className="bg-black/40 backdrop-blur-md border border-accent/30 text-accent text-[9px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-sm">
+                {/* Fallback Overlay (Shown while iframe loads or if it fails) */}
+                <div className="absolute inset-0 bg-gradient-to-br from-surface to-background flex flex-col items-center justify-center p-6 text-center z-0">
+                  <div className="w-16 h-16 rounded-full border border-border/50 flex items-center justify-center mb-6">
+                    <Play className="w-6 h-6 text-muted" fill="currentColor" />
+                  </div>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-accent mb-2">
                     {post.category.replace('-', ' ')}
                   </span>
-                  <InstagramIcon className="w-5 h-5 text-muted opacity-70 group-hover:text-foreground transition-colors" />
+                  <a 
+                    href={post.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-foreground hover:text-accent transition-colors mt-4"
+                  >
+                    View on Instagram <ArrowUpRightIcon className="w-3.5 h-3.5" />
+                  </a>
                 </div>
 
-                {/* Center: Play Button */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                  <div className="w-16 h-16 rounded-full border border-white/50 flex items-center justify-center group-hover:border-accent group-hover:scale-110 transition-all duration-500 bg-black/20 backdrop-blur-sm">
-                    <Play className="w-6 h-6 text-white ml-1 group-hover:text-accent transition-colors" fill="currentColor" />
-                  </div>
-                </div>
+                {/* The Iframe Embed (Overlays the fallback) */}
+                <iframe
+                  src={post.embedUrl}
+                  className="absolute inset-0 w-full h-full border-none z-10 bg-transparent"
+                  allowTransparency={true}
+                  loading="lazy"
+                  title={`Instagram post - ${post.category}`}
+                  scrolling="no"
+                  style={{ pointerEvents: 'auto' }}
+                />
 
-                {/* Bottom Bar: Content & CTA */}
-                <div className="absolute bottom-6 left-6 right-6 z-20">
-                  <h4 className="text-2xl md:text-3xl font-serif text-white mb-2 group-hover:text-accent transition-colors">
-                    {post.category === 'hoz-pox' ? 'HozPox Special' : post.category === 'informative' ? 'Auditions Open' : post.category === 'visuals' ? 'Masala Odyssey' : 'Aikat Mozo Tavo'}
-                  </h4>
-                  <p className="text-xs text-muted mb-6">
-                    {post.category === 'hoz-pox' ? 'Authentic Flavours • Premium Experience' : post.category === 'informative' ? 'New Talent • New Opportunities' : post.category === 'visuals' ? 'A Visual Journey • Crafted with Emotion' : 'The 7 Notes Band • Konkani Masala'}
-                  </p>
-                  
-                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-accent opacity-80 group-hover:opacity-100 transition-opacity">
-                    View on Instagram <ArrowUpRightIcon className="w-3.5 h-3.5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-                  </div>
+                {/* Optional Custom UI layered ON TOP of the iframe edges to frame it creatively */}
+                <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background/90 to-transparent z-20 pointer-events-none" />
+                <div className="absolute top-4 left-4 right-4 flex justify-between items-start z-30 pointer-events-none">
+                  <span className="bg-black/60 backdrop-blur-md border border-accent/30 text-accent text-[9px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-sm">
+                    {post.category.replace('-', ' ')}
+                  </span>
+                  <InstagramIcon className="w-5 h-5 text-white opacity-90 shadow-sm" />
                 </div>
                 
-              </motion.a>
+              </motion.div>
             ))}
           </AnimatePresence>
 
         </div>
         
-        {/* Fading edge to indicate scrollability on desktop */}
-        <div className="hidden md:block absolute right-0 top-0 bottom-8 w-24 bg-gradient-to-l from-background to-transparent pointer-events-none z-20" />
+        {/* Fading edge to indicate scrollability on desktop (Only for 'All' carousel) */}
+        {activeFilter === 'all' && (
+          <div className="hidden md:block absolute right-0 top-0 bottom-8 w-24 bg-gradient-to-l from-background to-transparent pointer-events-none z-20" />
+        )}
       </div>
 
       {/* Global CTA */}
