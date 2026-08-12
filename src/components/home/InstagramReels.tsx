@@ -156,7 +156,7 @@ export const InstagramReels = () => {
           className={
             activeFilter === 'all' 
               ? "flex overflow-x-auto gap-6 md:gap-8 pb-8 snap-x snap-mandatory scrollbar-hide" 
-              : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 pb-8"
+              : "flex flex-wrap justify-center lg:justify-start gap-6 md:gap-8 pb-8"
           }
           style={activeFilter === 'all' ? { scrollbarWidth: 'none', msOverflowStyle: 'none' } : {}}
         >
@@ -170,9 +170,7 @@ export const InstagramReels = () => {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
                 key={post.id}
-                className={`relative flex-shrink-0 aspect-[4/5] bg-surface-elevated border border-border/20 rounded-lg overflow-hidden group snap-center ${
-                  activeFilter === 'all' ? 'w-[300px] md:w-[350px] lg:w-[400px]' : 'w-full'
-                }`}
+                className="relative flex-shrink-0 aspect-[4/5] w-[300px] md:w-[350px] lg:w-[400px] bg-surface-elevated border border-border/20 rounded-lg overflow-hidden group snap-center"
               >
                 
                 {/* Fallback Overlay (Shown while iframe loads or if it fails) */}
