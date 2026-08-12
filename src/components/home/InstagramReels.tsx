@@ -4,8 +4,27 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
 import { instagramPosts, InstagramCategory } from '@/data/instagram';
-import { ArrowRight, Instagram } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+
+const InstagramIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
 
 type FilterOption = 'all' | InstagramCategory;
 
@@ -31,7 +50,7 @@ export const InstagramReels = () => {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div>
           <h2 className="text-xs font-bold tracking-[0.3em] text-accent uppercase mb-4 flex items-center gap-2">
-            <Instagram className="w-4 h-4" /> Our Work In Motion
+            <InstagramIcon className="w-4 h-4" /> Our Work In Motion
           </h2>
           <h3 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold uppercase tracking-tight text-foreground max-w-xl">
             Stories, visuals <span className="text-accent italic font-normal text-[0.9em]">&amp;</span> ideas brought to life.
@@ -74,7 +93,7 @@ export const InstagramReels = () => {
               >
                 {/* Fallback UI (Visible instantly, sits behind iframe, or shows if iframe fails/is blocked) */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-0 bg-surface">
-                  <Instagram className="w-8 h-8 text-muted mb-4 opacity-50" />
+                  <InstagramIcon className="w-8 h-8 text-muted mb-4 opacity-50" />
                   <span className="text-[10px] font-bold tracking-widest uppercase text-accent mb-2">
                     {post.category.replace('-', ' ')}
                   </span>
