@@ -58,15 +58,19 @@ export const Footer = () => {
             <ul className="space-y-6 text-sm text-muted">
               <li>
                 <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-2">Phone</span>
-                <a href="tel:#" className="text-base font-serif hover:text-foreground transition-colors">[VERIFIED PHONE]</a>
+                <a href="tel:+447383939393" className="text-base font-serif hover:text-foreground transition-colors">+44 73 83 93 93 93</a>
               </li>
               <li>
                 <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-2">Email</span>
-                <a href="mailto:#" className="text-base font-serif hover:text-foreground transition-colors">[VERIFIED EMAIL]</a>
+                <a href="mailto:hi@wedoeffects.co.uk" className="text-base font-serif hover:text-foreground transition-colors">hi@wedoeffects.co.uk</a>
               </li>
               <li>
                 <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-2">Address</span>
-                <span className="text-base font-serif hover:text-foreground transition-colors block leading-relaxed">[VERIFIED ADDRESS]</span>
+                <span className="text-base font-serif hover:text-foreground transition-colors block leading-relaxed">
+                  Hemel Hempstead
+                  <br />
+                  HP2 4FA
+                </span>
               </li>
             </ul>
           </div>
