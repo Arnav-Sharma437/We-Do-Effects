@@ -125,40 +125,32 @@ export const InstagramReels = () => {
             ))}
           </div>
 
-          {/* Carousel Controls (Only visible when ALL filter is active) */}
+          {/* Carousel Controls (Always visible) */}
           <div className="hidden md:flex items-center gap-4">
-            {activeFilter === 'all' && (
-              <>
-                <button 
-                  onClick={scrollLeft}
-                  className="w-12 h-12 rounded-full border border-border/30 flex items-center justify-center text-muted hover:border-accent hover:text-accent transition-colors"
-                  aria-label="Previous posts"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button 
-                  onClick={scrollRight}
-                  className="w-12 h-12 rounded-full border border-border/30 flex items-center justify-center text-muted hover:border-accent hover:text-accent transition-colors"
-                  aria-label="Next posts"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </>
-            )}
+            <button 
+              onClick={scrollLeft}
+              className="w-12 h-12 rounded-full border border-border/30 flex items-center justify-center text-muted hover:border-accent hover:text-accent transition-colors"
+              aria-label="Previous posts"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button 
+              onClick={scrollRight}
+              className="w-12 h-12 rounded-full border border-border/30 flex items-center justify-center text-muted hover:border-accent hover:text-accent transition-colors"
+              aria-label="Next posts"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Content Container: Carousel for 'ALL', Grid for specific categories */}
+      {/* Content Container: Always Carousel */}
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative">
         <div 
           ref={carouselRef}
-          className={
-            activeFilter === 'all' 
-              ? "flex overflow-x-auto gap-6 md:gap-8 pb-8 snap-x snap-mandatory scrollbar-hide" 
-              : "flex flex-wrap justify-center lg:justify-start gap-6 md:gap-8 pb-8"
-          }
-          style={activeFilter === 'all' ? { scrollbarWidth: 'none', msOverflowStyle: 'none' } : {}}
+          className="flex overflow-x-auto gap-6 md:gap-8 pb-8 snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           
           <AnimatePresence mode="popLayout">
@@ -217,10 +209,8 @@ export const InstagramReels = () => {
 
         </div>
         
-        {/* Fading edge to indicate scrollability on desktop (Only for 'All' carousel) */}
-        {activeFilter === 'all' && (
-          <div className="hidden md:block absolute right-0 top-0 bottom-8 w-24 bg-gradient-to-l from-background to-transparent pointer-events-none z-20" />
-        )}
+        {/* Fading edge to indicate scrollability on desktop */}
+        <div className="hidden md:block absolute right-0 top-0 bottom-8 w-24 bg-gradient-to-l from-background to-transparent pointer-events-none z-20" />
       </div>
 
       {/* Global CTA */}
