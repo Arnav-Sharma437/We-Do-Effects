@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { revalidatePath } from 'next/cache';
 
 export async function GET() {
   try {
@@ -21,6 +22,8 @@ export async function PUT(request: Request) {
     if (items.length > 0) {
       await db.collection('content_about').insertMany(items);
     }
+    
+    revalidatePath('/about');
     
     return NextResponse.json({ success: true });
   } catch (error) {

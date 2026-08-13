@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { Product } from '@/data/products';
+import { revalidatePath } from 'next/cache';
 
 export async function GET() {
   try {
@@ -23,6 +24,11 @@ export async function POST(request: Request) {
     }
     
     await db.collection('products').insertOne(data);
+    
+    // Revalidate cached paths
+    revalidatePath('/services');
+    revalidatePath(`/services/${data.slug}`);
+    
     return NextResponse.json({ success: true, product: data });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to create product' }, { status: 500 });

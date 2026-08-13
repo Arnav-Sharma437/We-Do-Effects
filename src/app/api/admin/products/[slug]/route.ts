@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
+import { revalidatePath } from 'next/cache';
 
 export async function PUT(request: Request, { params }: { params: Promise<{ slug: string }> }) {
   try {
@@ -14,6 +15,10 @@ export async function PUT(request: Request, { params }: { params: Promise<{ slug
       { $set: data }
     );
     
+    // Revalidate cached paths
+    revalidatePath('/services');
+    revalidatePath(`/services/${slug}`);
+    
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to update product' }, { status: 500 });
@@ -26,6 +31,10 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ s
     const db = await getDb();
     
     await db.collection('products').deleteOne({ slug });
+    
+    // Revalidate cached paths
+    revalidatePath('/services');
+    revalidatePath(`/services/${slug}`);
     
     return NextResponse.json({ success: true });
   } catch (error) {
