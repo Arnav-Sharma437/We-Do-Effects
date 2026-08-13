@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
 import { Button } from '@/components/ui/Button';
+import Link from 'next/link';
 
 export const AboutCTA = () => {
   return (
@@ -28,11 +29,11 @@ export const AboutCTA = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button href="/book" variant="primary" size="lg" className="w-full sm:w-auto">
-              GET A QUOTE
+            <Button asChild variant="default" size="lg" className="w-full sm:w-auto">
+              <Link href="/book">GET A QUOTE</Link>
             </Button>
-            <Button href="/work" variant="outline" size="lg" className="w-full sm:w-auto">
-              VIEW OUR WORK
+            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
+              <Link href="/work">VIEW OUR WORK</Link>
             </Button>
           </div>
         </motion.div>
