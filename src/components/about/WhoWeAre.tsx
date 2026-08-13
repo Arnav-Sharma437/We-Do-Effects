@@ -2,62 +2,42 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Section } from '@/components/layout/Section';
 
 export const WhoWeAre = () => {
   return (
-    <Section spacing="lg" className="relative overflow-hidden bg-background border-b border-border/10">
-      
-      {/* Oversized Background Typography */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full overflow-hidden pointer-events-none select-none z-0 flex justify-center opacity-[0.02]">
-        <h2 className="text-[18vw] font-serif font-bold whitespace-nowrap text-white leading-none tracking-tighter">
-          ATTENTION
-        </h2>
-      </div>
-
-      <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 md:px-12 relative z-10">
-        
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
+    <section className="bg-background pb-16 md:pb-24">
+      <div className="max-w-[1200px] w-full mx-auto px-6 lg:px-12">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-24 items-start">
           
-          {/* Left: Heading */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="lg:w-1/3 w-full"
+            viewport={{ once: true }}
+            className="w-full md:w-1/3"
           >
-            <div className="text-accent font-sans text-sm font-bold tracking-widest mb-4">
-              01
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold uppercase tracking-tight text-foreground">
-              WHO WE ARE?
+            <h2 className="text-3xl md:text-4xl font-serif font-bold uppercase tracking-tight text-foreground">
+              Who We Are
             </h2>
-            <motion.div 
-              initial={{ width: 0 }}
-              whileInView={{ width: "80px" }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="h-[1px] bg-accent mt-8 opacity-80" 
-            />
+            <div className="w-12 h-[2px] bg-accent mt-6" />
           </motion.div>
 
-          {/* Right: Content */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-            className="lg:w-2/3 w-full lg:pl-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="w-full md:w-2/3"
           >
-            <p className="text-lg md:text-2xl text-muted font-sans leading-relaxed md:leading-[1.8] font-light">
+            <p className="text-lg md:text-xl text-foreground/80 font-sans leading-relaxed mb-6">
               "Attention-wise, videos always come first, especially in a digital market filled with short attention spans and an overflow of content. From 15-second spots to TV commercials, the video takes the client's message and turns it into something even more easily remembered, building a great rapport for the brand itself."
+            </p>
+            <p className="text-base text-foreground/70 font-sans leading-relaxed">
+              We help companies preserve and innovate digital strategies incorporated creatively in advertising themes that blend today's influences with traditional marketing approaches. Deep knowledge of constantly shifting realities, a team of passionate experts, and individual solutions that drive growth, visibility enhancement, and meaningful relationships with customers is what the company provides.
             </p>
           </motion.div>
 
         </div>
-
       </div>
-    </Section>
+    </section>
   );
 };

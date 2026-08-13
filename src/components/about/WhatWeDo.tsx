@@ -1,11 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Section } from '@/components/layout/Section';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 
 const services = [
   {
@@ -41,183 +38,57 @@ const services = [
 ];
 
 export const WhatWeDo = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-
-  // Use hover index if available, otherwise fallback to the last clicked active index
-  const displayIndex = hoverIndex !== null ? hoverIndex : activeIndex;
-
   return (
-    <Section spacing="lg" className="relative border-t border-border/10 bg-surface">
-      
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+    <section className="bg-surface py-16 md:py-24">
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
         
-        {/* Section Intro */}
-        <div className="max-w-3xl mb-12 md:mb-16">
+        <div className="mb-12 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="text-accent font-sans text-sm font-bold tracking-widest mb-4">
-              02
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold uppercase tracking-tight text-foreground mb-6">
-              WHAT WE DO?
+            <h2 className="text-3xl md:text-4xl font-serif font-bold uppercase tracking-tight text-foreground mb-4">
+              What We Do
             </h2>
+            <div className="w-12 h-[2px] bg-accent mb-6" />
+            <p className="text-lg text-foreground/80 font-sans max-w-2xl">
+              Our services cover all aspects of marketing so that your brand will receive maximum exposure and engagement with audiences on any platform.
+            </p>
           </motion.div>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-foreground/80 font-sans leading-relaxed"
-          >
-            Our services cover all aspects of marketing so that your brand will receive maximum exposure and engagement with audiences on any platform:
-          </motion.p>
         </div>
 
-        {/* DESKTOP: Interactive Split Layout */}
-        <div className="hidden lg:flex gap-16 min-h-[600px]">
-          
-          {/* Left: Service List */}
-          <div className="w-1/2 flex flex-col justify-center border-t border-border/20">
-            {services.map((service, index) => {
-              const isActive = displayIndex === index;
-              return (
-                <div 
-                  key={index}
-                  onMouseEnter={() => setHoverIndex(index)}
-                  onMouseLeave={() => setHoverIndex(null)}
-                  onClick={() => setActiveIndex(index)}
-                  className={`group relative flex flex-col py-8 cursor-pointer border-b border-border/20 transition-all duration-500 ease-out ${
-                    isActive ? 'bg-surface-elevated/30 pl-8 -ml-8 pr-8' : 'hover:bg-surface-elevated/10'
-                  }`}
-                >
-                  <div className="flex items-start gap-8">
-                    <span className={`text-sm font-bold tracking-widest mt-2 transition-colors duration-300 ${
-                      isActive ? 'text-accent' : 'text-muted'
-                    }`}>
-                      0{index + 1}
-                    </span>
-                    <div className="flex-1">
-                      <h3 className={`text-3xl font-serif mb-4 transition-all duration-300 ${
-                        isActive ? 'text-accent translate-x-2' : 'text-foreground'
-                      }`}>
-                        {service.title}
-                      </h3>
-                      
-                      <AnimatePresence>
-                        {isActive && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden"
-                          >
-                            <p className="text-foreground/80 font-sans leading-relaxed mb-6 pr-8">
-                              {service.description}
-                            </p>
-                            <Link 
-                              href="/services"
-                              className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground hover:text-accent transition-colors"
-                            >
-                              READ MORE 
-                              <ArrowRight className="w-3.5 h-3.5 translate-x-2 transition-transform duration-300" />
-                            </Link>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Right: Dynamic Image Viewer */}
-          <div className="w-1/2 relative h-full">
-            <div className="sticky top-24 lg:top-32 w-full h-[60vh] max-h-[600px] border border-border/20 bg-background rounded-lg shadow-xl overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={displayIndex}
-                  initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="absolute inset-0"
-                >
-                  <Image 
-                    src={services[displayIndex].image}
-                    alt={services[displayIndex].title}
-                    fill
-                    className="object-cover object-center"
-                  />
-                  {/* Subtle vignette/overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/20" />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-
-        {/* MOBILE & TABLET: Accordion / Cards Layout */}
-        <div className="flex lg:hidden flex-col gap-6">
-          {services.map((service, index) => {
-            const isActive = activeIndex === index;
-            return (
-              <div 
-                key={index} 
-                className="border border-border/20 bg-background overflow-hidden"
-              >
-                <button
-                  onClick={() => setActiveIndex(isActive ? -1 : index)}
-                  className="w-full text-left p-6 flex items-center justify-between bg-surface-elevated/10"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-accent text-sm font-bold">0{index + 1}</span>
-                    <h3 className="text-xl font-serif text-foreground">{service.title}</h3>
-                  </div>
-                  <ChevronDown className={`w-5 h-5 text-muted transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.div
-                      initial={{ height: 0 }}
-                      animate={{ height: "auto" }}
-                      exit={{ height: 0 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="p-6 pt-0 border-t border-border/10">
-                        <div className="relative w-full aspect-video mb-6 mt-6 overflow-hidden">
-                          <Image 
-                            src={service.image}
-                            alt={service.title}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                        <p className="text-muted font-light leading-relaxed mb-6">
-                          {service.description}
-                        </p>
-                        <Link 
-                          href="/services"
-                          className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-accent"
-                        >
-                          READ MORE <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="flex flex-col bg-background border border-border/20 rounded-lg overflow-hidden group"
+            >
+              <div className="relative w-full aspect-video overflow-hidden">
+                <Image 
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
-            );
-          })}
+              <div className="p-6 md:p-8 flex-1 flex flex-col">
+                <h3 className="text-xl font-serif text-foreground font-bold mb-4 group-hover:text-accent transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-foreground/70 font-sans leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
       </div>
-    </Section>
+    </section>
   );
 };
