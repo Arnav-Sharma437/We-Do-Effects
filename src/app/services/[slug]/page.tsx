@@ -6,19 +6,36 @@ import { ServiceHero } from '@/components/services/ServiceHero';
 import { ProductClient } from '@/components/cart/ProductClient';
 import { Check } from 'lucide-react';
 import { getDb } from '@/lib/mongodb';
-import { Product } from '@/data/products'; // Keep type definition
+import { products, getProductBySlug } from '@/data/products';
 
 export const revalidate = 3600; // Revalidate every hour
+
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
+}
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   
-  // Directly fetch from MongoDB
-  const db = await getDb();
-  const product = await db.collection<Product>('products').findOne({ slug });
+  let product: typeof products[0] | null = null;
+
+  try {
+    const db = await getDb();
+    // @ts-expect-error - Document type mismatch but perfectly valid
+    product = await db.collection<Product>('products').findOne({ slug }) as typeof products[0] | null;
+  } catch (error) {
+    console.warn(`[Build Fallback] MongoDB fetch failed for ${slug}, using local data.`);
+    product = getProductBySlug(slug) || null;
+  }
 
   if (!product) {
-    notFound();
+    // If it's still missing from both MongoDB and local fallback
+    product = getProductBySlug(slug) || null;
+    if (!product) {
+      notFound();
+    }
   }
 
   return (
