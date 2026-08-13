@@ -5,17 +5,17 @@ import { Eye } from 'lucide-react';
 
 interface Order {
   _id: string;
-  orderRef: string;
-  customer: {
-    name: string;
+  orderId: string;
+  customerDetails: {
+    firstName: string;
+    lastName: string;
     email: string;
     phone: string;
+    company: string;
   };
-  cart: {
-    items: any[];
-    subtotal: number;
-    depositAmount: number;
-  };
+  items: any[];
+  subtotal: number;
+  deposit: number;
   status: string;
   createdAt: string;
 }
@@ -80,28 +80,28 @@ export default function AdminOrdersPage() {
               <tbody>
                 {orders.map((order) => (
                   <tr key={order._id} className="border-b border-border/10 hover:bg-background/30 transition-colors">
-                    <td className="p-4 font-bold text-accent">{order.orderRef}</td>
+                    <td className="p-4 font-bold text-accent">{order.orderId}</td>
                     <td className="p-4 text-foreground/80">{new Date(order.createdAt).toLocaleDateString()}</td>
                     <td className="p-4">
-                      <div className="font-medium text-foreground">{order.customer.name}</div>
-                      <div className="text-xs text-foreground/60">{order.customer.email}</div>
+                      <div className="font-medium text-foreground">{order.customerDetails?.firstName} {order.customerDetails?.lastName}</div>
+                      <div className="text-xs text-foreground/60">{order.customerDetails?.email}</div>
                     </td>
-                    <td className="p-4 font-medium text-foreground">${order.cart?.subtotal || 0}</td>
-                    <td className="p-4 text-foreground/80">${order.cart?.depositAmount || 0}</td>
+                    <td className="p-4 font-medium text-foreground">${order.subtotal || 0}</td>
+                    <td className="p-4 text-foreground/80">${order.deposit || 0}</td>
                     <td className="p-4">
                       <select 
-                        value={order.status || 'Pending'}
+                        value={order.status || 'pending'}
                         onChange={(e) => handleStatusChange(order._id, e.target.value)}
                         className={`text-xs font-bold uppercase rounded px-2 py-1 border-none focus:ring-0 ${
-                          order.status === 'Completed' ? 'bg-green-500/10 text-green-500' :
-                          order.status === 'Cancelled' ? 'bg-red-500/10 text-red-500' :
+                          order.status === 'completed' ? 'bg-green-500/10 text-green-500' :
+                          order.status === 'cancelled' ? 'bg-red-500/10 text-red-500' :
                           'bg-amber-500/10 text-amber-500'
                         }`}
                       >
-                        <option value="Pending">Pending</option>
-                        <option value="Processing">Processing</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Cancelled">Cancelled</option>
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
                       </select>
                     </td>
                     <td className="p-4 text-right">

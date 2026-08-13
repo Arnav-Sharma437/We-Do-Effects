@@ -8,10 +8,10 @@ export async function GET() {
     // Total Orders & Revenue
     const orders = await db.collection('orders').find({}).toArray();
     const totalOrders = orders.length;
-    const revenue = orders.reduce((acc, order) => acc + (order.cart?.subtotal || 0), 0);
-    const pendingOrders = orders.filter(o => o.status === 'Pending').length;
-    const completedOrders = orders.filter(o => o.status === 'Completed').length;
-    const cancelledOrders = orders.filter(o => o.status === 'Cancelled').length;
+    const revenue = orders.reduce((acc, order) => acc + (order.subtotal || 0), 0);
+    const pendingOrders = orders.filter(o => o.status === 'pending').length;
+    const completedOrders = orders.filter(o => o.status === 'completed').length;
+    const cancelledOrders = orders.filter(o => o.status === 'cancelled').length;
 
     // Total Customers
     const totalCustomers = await db.collection('customers').countDocuments();
@@ -24,10 +24,10 @@ export async function GET() {
     const addonCounts: Record<string, number> = {};
     
     orders.forEach(order => {
-      order.cart?.items?.forEach((item: any) => {
-        productCounts[item.name] = (productCounts[item.name] || 0) + item.quantity;
-        item.addons?.forEach((addon: any) => {
-          addonCounts[addon.name] = (addonCounts[addon.name] || 0) + item.quantity;
+      order.items?.forEach((item: any) => {
+        productCounts[item.product?.name] = (productCounts[item.product?.name] || 0) + (item.quantity || 1);
+        item.selectedAddons?.forEach((addon: any) => {
+          addonCounts[addon.name] = (addonCounts[addon.name] || 0) + (item.quantity || 1);
         });
       });
     });
@@ -48,7 +48,7 @@ export async function GET() {
     const trendMap = new Map();
     orders.forEach(order => {
       const date = new Date(order.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      trendMap.set(date, (trendMap.get(date) || 0) + (order.cart?.subtotal || 0));
+      trendMap.set(date, (trendMap.get(date) || 0) + (order.subtotal || 0));
     });
     
     const revenueTrends = Array.from(trendMap.entries())
