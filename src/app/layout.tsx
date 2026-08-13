@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Oswald } from "next/font/google";
+import { Roboto, Tenor_Sans, Oswald } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const roboto = Roboto({
+  weight: ['300', '400', '500', '700'],
+  variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const tenorSans = Tenor_Sans({
+  weight: ['400'],
+  variable: "--font-serif",
   subsets: ["latin"],
   display: "swap",
 });
@@ -31,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${oswald.variable} h-full antialiased`}>
+    <html lang="en" className={`${roboto.variable} ${tenorSans.variable} ${oswald.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-accent selection:text-background">{children}</body>
     </html>
   );
