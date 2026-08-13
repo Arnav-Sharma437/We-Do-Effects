@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 import { getDb } from '@/lib/mongodb';
 
 export async function GET() {
