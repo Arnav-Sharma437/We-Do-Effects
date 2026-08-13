@@ -48,7 +48,7 @@ export const WhatWeDo = () => {
   const displayIndex = hoverIndex !== null ? hoverIndex : activeIndex;
 
   return (
-    <Section spacing="lg" className="relative overflow-hidden border-t border-border/10 bg-surface">
+    <Section spacing="lg" className="relative border-t border-border/10 bg-surface">
       
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
         
@@ -137,8 +137,8 @@ export const WhatWeDo = () => {
           </div>
 
           {/* Right: Dynamic Image Viewer */}
-          <div className="w-1/2 relative">
-            <div className="sticky top-24 lg:top-32 w-full h-[60vh] max-h-[600px] overflow-hidden border border-border/20 bg-background rounded-lg shadow-xl">
+          <div className="w-1/2 relative h-full">
+            <div className="sticky top-24 lg:top-32 w-full h-[60vh] max-h-[600px] border border-border/20 bg-background rounded-lg shadow-xl overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={displayIndex}
