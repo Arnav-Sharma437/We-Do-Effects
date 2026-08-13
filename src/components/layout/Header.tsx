@@ -4,13 +4,16 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { navigation } from '@/data/navigation';
 import { Button } from '@/components/ui/Button';
-import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, X, ShoppingBag } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useCart } from '@/context/CartContext';
+import { CartDrawer } from '@/components/cart/CartDrawer';
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openAccordions, setOpenAccordions] = useState<string[]>([]);
+  const { totalItems, setIsCartOpen } = useCart();
 
   const toggleAccordion = (name: string) => {
     setOpenAccordions(prev => 
@@ -60,6 +63,20 @@ export const Header = () => {
         {/* Desktop CTA & Mobile Toggle */}
         <div className="flex items-center gap-4">
           <ThemeToggle />
+          
+          <button 
+            onClick={() => setIsCartOpen(true)}
+            className="relative p-2 text-foreground hover:text-accent transition-colors"
+            aria-label="Open Cart"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            {totalItems > 0 && (
+              <span className="absolute top-0 right-0 w-4 h-4 bg-accent text-background text-[10px] font-bold rounded-full flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
+          </button>
+
           <div className="hidden lg:flex items-center">
             <Button asChild className="h-10 px-6 rounded-none text-[11px] font-bold uppercase tracking-widest bg-foreground text-background hover:bg-foreground/90 transition-colors flex items-center gap-2">
               <Link href="/book">
@@ -143,6 +160,7 @@ export const Header = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <CartDrawer />
     </header>
   );
 };

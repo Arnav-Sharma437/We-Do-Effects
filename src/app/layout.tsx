@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto, Tenor_Sans, Oswald } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -42,7 +43,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <CartProvider>
+            {children}
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>
