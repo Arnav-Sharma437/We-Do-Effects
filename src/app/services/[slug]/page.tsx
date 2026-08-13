@@ -8,6 +8,8 @@ import { Check } from 'lucide-react';
 import { getDb } from '@/lib/mongodb';
 import { Product } from '@/data/products'; // Keep type definition
 
+export const revalidate = 3600; // Revalidate every hour
+
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   
