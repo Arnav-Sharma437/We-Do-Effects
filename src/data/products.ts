@@ -14,6 +14,7 @@ export interface Product {
   category: string;
   features: string[];
   addons?: ProductAddon[];
+  isActive?: boolean;
 }
 
 export const products: Product[] = [

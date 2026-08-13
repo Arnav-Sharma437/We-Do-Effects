@@ -21,8 +21,30 @@ const featuredWork = [
   }
 ];
 
-export const SelectedWork = () => {
+interface WorkItem {
+  id: string;
+  _id?: string;
+  title: string;
+  category: string;
+  description: string;
+  link: string;
+  image: string;
+}
+
+export const SelectedWork = ({ workData }: { workData?: WorkItem[] }) => {
   const prefersReducedMotion = useReducedMotion();
+  const [data, setData] = React.useState<WorkItem[]>(workData || []);
+
+  React.useEffect(() => {
+    if (!workData || workData.length === 0) {
+      fetch('/api/admin/content/work').then(r => r.json()).then(res => {
+        if (res && res.length > 0) setData(res);
+      });
+    }
+  }, [workData]);
+
+  // Fallback to original hardcoded data if empty
+  const displayData: any[] = data.length > 0 ? data : featuredWork.map(w => ({ ...w, title: w.client, category: w.service, description: w.context, link: `/work/${w.id}`, image: '' }));
 
   return (
     <Section spacing="xl" className="bg-surface relative overflow-hidden border-y border-border/50">
@@ -34,9 +56,9 @@ export const SelectedWork = () => {
       </div>
 
       <div className="flex flex-col gap-24 md:gap-40">
-        {featuredWork.map((project, index) => (
+        {displayData.map((project, index) => (
           <motion.div 
-            key={project.id}
+            key={project._id || project.id}
             initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-20%" }}
@@ -45,33 +67,38 @@ export const SelectedWork = () => {
           >
             {/* Massive Image Placeholder */}
             <div className="w-full lg:w-[60%] aspect-[4/5] md:aspect-video bg-background relative overflow-hidden border border-border/30">
-              <div className="absolute inset-0 bg-gradient-to-tr from-surface-elevated to-surface flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
-                <div className="text-border font-display text-5xl md:text-8xl font-bold uppercase tracking-tighter -rotate-12 opacity-30 group-hover:scale-110 transition-transform duration-700">
-                  {project.id}
+              {project.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-tr from-surface-elevated to-surface flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                  <div className="text-border font-display text-5xl md:text-8xl font-bold uppercase tracking-tighter -rotate-12 opacity-30 group-hover:scale-110 transition-transform duration-700">
+                    {project._id || project.id}
+                  </div>
                 </div>
-              </div>
+              )}
               
               {/* Interaction Overlay */}
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex items-center justify-center">
-                <div className="bg-accent text-background text-xs font-bold uppercase tracking-[0.2em] px-8 py-4 rounded-full translate-y-8 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
+                <Link href={project.link || '#'} className="bg-accent text-background text-xs font-bold uppercase tracking-[0.2em] px-8 py-4 rounded-full translate-y-8 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
                   View Project
-                </div>
+                </Link>
               </div>
             </div>
 
             {/* Project Context */}
             <div className={`w-full lg:w-[40%] flex flex-col ${index % 2 === 1 ? 'lg:items-end lg:text-right' : 'lg:items-start text-left'} z-20`}>
               <div className="w-16 h-[2px] bg-accent mb-8" />
-              <span className="text-xs font-bold tracking-[0.3em] text-accent uppercase block mb-4">{project.service}</span>
-              <h4 className="text-5xl md:text-6xl font-display font-bold uppercase text-foreground mb-6 leading-none tracking-tight">{project.client}</h4>
+              <span className="text-xs font-bold tracking-[0.3em] text-accent uppercase block mb-4">{project.category}</span>
+              <h4 className="text-5xl md:text-6xl font-display font-bold uppercase text-foreground mb-6 leading-none tracking-tight">{project.title}</h4>
               
               <p className="text-muted text-base leading-relaxed mb-10 max-w-sm">
                 <span className="text-foreground font-medium block mb-2">Context:</span>
-                A brief overview of the challenge and strategy will be inserted here when verified project data is supplied.
+                {project.description}
               </p>
               
               <Link 
-                href={`/work/${project.id}`}
+                href={project.link || '#'}
                 className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-foreground hover:text-accent transition-colors"
               >
                 <span>Read Case Study</span>

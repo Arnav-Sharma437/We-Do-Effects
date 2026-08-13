@@ -37,7 +37,19 @@ const services = [
   }
 ];
 
-export const WhatWeDo = () => {
+export const WhatWeDo = ({ aboutData }: { aboutData?: any[] }) => {
+  const [data, setData] = React.useState<any[]>(aboutData || []);
+
+  React.useEffect(() => {
+    if (!aboutData || aboutData.length === 0) {
+      fetch('/api/admin/content/about').then(r => r.json()).then(res => {
+        if (res && res.length > 0) setData(res);
+      });
+    }
+  }, [aboutData]);
+
+  const displayData = data.length > 0 ? data : services;
+
   return (
     <section className="bg-surface py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
@@ -59,9 +71,9 @@ export const WhatWeDo = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {displayData.map((service, index) => (
             <motion.div
-              key={index}
+              key={service._id || index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -69,12 +81,16 @@ export const WhatWeDo = () => {
               className="flex flex-col bg-background border border-border/20 rounded-lg overflow-hidden group"
             >
               <div className="relative w-full aspect-video overflow-hidden">
-                <Image 
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                {service.image || service.icon ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img 
+                    src={service.image || service.icon}
+                    alt={service.title}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-surface-elevated" />
+                )}
               </div>
               <div className="p-6 md:p-8 flex-1 flex flex-col">
                 <h3 className="text-xl font-serif text-foreground font-bold mb-4 group-hover:text-accent transition-colors">
