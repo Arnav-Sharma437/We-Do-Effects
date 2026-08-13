@@ -168,8 +168,17 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
           <h2 className="text-xl font-serif font-bold text-foreground">Media</h2>
           <div className="flex gap-6 items-start">
             {product.image && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={product.image} alt="Preview" className="w-48 h-32 object-cover rounded-lg border border-border/20" />
+              <div className="relative group">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={product.image} alt="Preview" className="w-48 h-32 object-cover rounded-lg border border-border/20" />
+                <button 
+                  onClick={() => setProduct({ ...product, image: '' })}
+                  className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                  title="Remove Image"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
             )}
             <div className="flex-1">
               <label className="block text-sm font-medium text-foreground/70 mb-2">Upload Image</label>
