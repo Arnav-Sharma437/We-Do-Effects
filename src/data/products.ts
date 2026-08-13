@@ -78,7 +78,7 @@ export const products: Product[] = [
   },
   {
     id: "prod_graphic_design",
-    slug: "graphic-designing",
+    slug: "designing",
     name: "Graphic Design Package",
     description: "Premium visual assets to elevate your brand identity. From logos to comprehensive marketing materials.",
     price: 800,

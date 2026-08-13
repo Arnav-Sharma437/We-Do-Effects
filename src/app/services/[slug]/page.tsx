@@ -16,8 +16,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   
   let product: typeof products[0] | null = null;
 
@@ -26,13 +26,19 @@ export default async function ProductPage({ params }: { params: { slug: string }
     // @ts-expect-error - Document type mismatch but perfectly valid
     product = await db.collection<Product>('products').findOne({ slug }) as typeof products[0] | null;
   } catch (error) {
-    console.warn(`[Build Fallback] MongoDB fetch failed for ${slug}, using local data.`);
-    product = getProductBySlug(slug) || null;
+    if (!process.env.MONGODB_URI) {
+      console.warn(`[Build Fallback] MongoDB fetch failed for ${slug}, using local data.`);
+      product = getProductBySlug(slug) || null;
+    } else {
+      console.error(`[Production Error] MongoDB fetch failed for ${slug}:`, error);
+      throw error;
+    }
   }
 
   if (!product) {
-    // If it's still missing from both MongoDB and local fallback
-    product = getProductBySlug(slug) || null;
+    if (!process.env.MONGODB_URI) {
+      product = getProductBySlug(slug) || null;
+    }
     if (!product) {
       notFound();
     }
