@@ -12,16 +12,42 @@ export default function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Mock WooCommerce API submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const formData = new FormData(e.target as HTMLFormElement);
+      const payload = {
+        firstName: formData.get('firstName'),
+        lastName: formData.get('lastName'),
+        company: formData.get('company'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        notes: formData.get('notes'),
+        items: items
+      };
+
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to create order');
+      }
+
       setIsSuccess(true);
       clearCart();
-    }, 1500);
+    } catch (error) {
+      console.error(error);
+      alert(error instanceof Error ? error.message : "Error placing order.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSuccess) {
@@ -67,23 +93,23 @@ export default function CheckoutPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-foreground/70">First Name *</label>
-                      <input required type="text" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
+                      <input name="firstName" required type="text" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-foreground/70">Last Name *</label>
-                      <input required type="text" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
+                      <input name="lastName" required type="text" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
                     </div>
                     <div className="space-y-2 md:col-span-2">
                       <label className="text-sm font-bold text-foreground/70">Company Name (Optional)</label>
-                      <input type="text" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
+                      <input name="company" type="text" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-foreground/70">Email Address *</label>
-                      <input required type="email" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
+                      <input name="email" required type="email" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-foreground/70">Phone *</label>
-                      <input required type="tel" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
+                      <input name="phone" required type="tel" className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors" />
                     </div>
                   </div>
                 </div>
@@ -94,6 +120,7 @@ export default function CheckoutPage() {
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-foreground/70">Order Notes (Optional)</label>
                     <textarea 
+                      name="notes"
                       rows={4} 
                       placeholder="Notes about your order, e.g. special notes for delivery or project details."
                       className="w-full bg-background border border-border/20 rounded-lg p-3 text-foreground focus:border-accent outline-none transition-colors resize-none" 

@@ -1,17 +1,84 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { getProductBySlug } from '@/data/products';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ServiceHero } from '@/components/services/ServiceHero';
 import { ProductClient } from '@/components/cart/ProductClient';
 import { Check } from 'lucide-react';
+import { Product } from '@/data/products'; // Keep type definition if needed, or inline it
+
+async function getWooCommerceProduct(slug: string): Promise<Product | null> {
+  try {
+    // In server components, fetch via absolute URL or directly via WC API
+    // Since we are in a server component, we should ideally fetch directly 
+    // to avoid Next.js absolute URL requirements during build time.
+    const { wcApi } = await import('@/lib/woocommerce');
+    
+    if (!process.env.NEXT_PUBLIC_WC_URL) {
+      return null;
+    }
+
+    const { data: products } = await wcApi.get("products", { slug });
+    
+    if (!products || products.length === 0) {
+      return null;
+    }
+
+    const product = products[0];
+    let variations = [];
+    if (product.type === 'variable') {
+      const { data } = await wcApi.get(`products/${product.id}/variations`);
+      variations = data;
+    }
+
+    return {
+      id: String(product.id),
+      slug: product.slug,
+      name: product.name,
+      description: product.short_description?.replace(/<[^>]+>/g, '') || product.name,
+      price: parseFloat(product.price || '0'),
+      image: product.images?.length > 0 ? product.images[0].src : '/assets/about/hero.jpg',
+      category: product.categories?.length > 0 ? product.categories[0].name : 'Services',
+      features: [
+        "Premium Agency Quality",
+        "Dedicated Support",
+        "Satisfaction Guarantee"
+      ],
+      addons: variations.map((v: any) => ({
+        id: String(v.id),
+        name: v.attributes?.length > 0 ? v.attributes[0].option : `Add-on`,
+        price: parseFloat(v.price || '0')
+      }))
+    };
+  } catch (error) {
+    console.error("WooCommerce Fetch Error:", error);
+    return null;
+  }
+}
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const product = getProductBySlug(slug);
+  const product = await getWooCommerceProduct(slug);
 
   if (!product) {
+    // If the API keys aren't set, we show a helpful error instead of a generic 404
+    if (!process.env.NEXT_PUBLIC_WC_URL) {
+      return (
+        <>
+          <Header />
+          <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] bg-background text-center px-6">
+            <h1 className="text-3xl font-bold font-serif mb-4">WooCommerce Not Connected</h1>
+            <p className="text-foreground/70 max-w-lg mb-8">
+              This is a dynamic WooCommerce product page. It is attempting to fetch "{slug}" from your WordPress backend.
+            </p>
+            <p className="text-accent max-w-lg font-bold">
+              Please add your WooCommerce URL, Consumer Key, and Consumer Secret to your .env file to enable this page.
+            </p>
+          </div>
+          <Footer />
+        </>
+      );
+    }
     notFound();
   }
 
