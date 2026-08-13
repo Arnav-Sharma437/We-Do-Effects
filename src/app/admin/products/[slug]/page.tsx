@@ -135,7 +135,7 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground/70 mb-2">Base Price ($)</label>
+              <label className="block text-sm font-medium text-foreground/70 mb-2">Base Price (£)</label>
               <input 
                 type="number"
                 value={product.price || 0} 
@@ -259,7 +259,7 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
                   />
                 </div>
                 <div className="w-32">
-                  <label className="block text-xs font-medium text-foreground/50 mb-1">Price ($)</label>
+                  <label className="block text-xs font-medium text-foreground/50 mb-1">Price (£)</label>
                   <input 
                     type="number"
                     value={addon.price} 

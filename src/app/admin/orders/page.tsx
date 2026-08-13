@@ -86,8 +86,8 @@ export default function AdminOrdersPage() {
                       <div className="font-medium text-foreground">{order.customerDetails?.firstName} {order.customerDetails?.lastName}</div>
                       <div className="text-xs text-foreground/60">{order.customerDetails?.email}</div>
                     </td>
-                    <td className="p-4 font-medium text-foreground">${order.subtotal || 0}</td>
-                    <td className="p-4 text-foreground/80">${order.deposit || 0}</td>
+                    <td className="p-4 font-medium text-foreground">£{order.subtotal || 0}</td>
+                    <td className="p-4 text-foreground/80">£{order.deposit || 0}</td>
                     <td className="p-4">
                       <select 
                         value={order.status || 'pending'}

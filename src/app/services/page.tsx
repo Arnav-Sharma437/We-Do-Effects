@@ -80,7 +80,7 @@ export default async function ServicesPage() {
                     <div className="flex items-center justify-between mt-auto pt-6 border-t border-border/10">
                       <div className="flex flex-col">
                         <span className="text-[11px] text-foreground/50 uppercase tracking-wider font-semibold mb-1">Starting at</span>
-                        <span className="text-lg font-bold text-foreground">${product.price}</span>
+                        <span className="text-lg font-bold text-foreground">£{product.price}</span>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-background transition-colors">
                         <ArrowRight className="w-5 h-5" />

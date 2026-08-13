@@ -82,7 +82,7 @@ export default function AdminProductsPage() {
                     <img src={product.image} alt={product.name} className="w-16 h-12 object-cover rounded" />
                   </td>
                   <td className="p-4 font-medium text-foreground">{product.name}</td>
-                  <td className="p-4 text-foreground/80">${product.price}</td>
+                  <td className="p-4 text-foreground/80">£{product.price}</td>
                   <td className="p-4 text-foreground/80">{product.category}</td>
                   <td className="p-4">
                     <span className={`px-2 py-1 text-xs font-bold uppercase rounded ${product.isActive !== false ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'}`}>

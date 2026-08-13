@@ -35,7 +35,7 @@ export default function AdminDashboard() {
   }
 
   const kpis = [
-    { label: 'Total Revenue', value: `$${data.totals.revenue.toLocaleString()}`, icon: DollarSign, color: 'text-green-500', bg: 'bg-green-500/10' },
+    { label: 'Total Revenue', value: `£${data.totals.revenue.toLocaleString()}`, icon: DollarSign, color: 'text-green-500', bg: 'bg-green-500/10' },
     { label: 'Total Orders', value: data.totals.orders, icon: ShoppingCart, color: 'text-blue-500', bg: 'bg-blue-500/10' },
     { label: 'Customers', value: data.totals.customers, icon: Users, color: 'text-purple-500', bg: 'bg-purple-500/10' },
     { label: 'Enquiries', value: data.totals.enquiries, icon: MessageSquare, color: 'text-orange-500', bg: 'bg-orange-500/10' }
@@ -79,7 +79,7 @@ export default function AdminDashboard() {
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
                 <XAxis dataKey="date" stroke="#ffffff50" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#ffffff50" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `$${val}`} />
+                <YAxis stroke="#ffffff50" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `£${val}`} />
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#1a1a1a', borderColor: '#ffffff20', borderRadius: '8px' }}
                   itemStyle={{ color: '#d4af37' }}
