@@ -31,7 +31,7 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
       fetch('/api/admin/products')
         .then(res => res.json())
         .then(data => {
-          const found = data.find((p: Product) => p.slug === slug);
+          const found = data.find((p: Product) => p.slug === slug || p.id === slug);
           if (found) setProduct(found);
           setLoading(false);
         });

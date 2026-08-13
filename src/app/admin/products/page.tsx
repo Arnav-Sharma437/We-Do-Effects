@@ -25,10 +25,11 @@ export default function AdminProductsPage() {
     fetchProducts();
   }, []);
 
-  const handleDelete = async (slug: string) => {
+  const handleDelete = async (id: string, slug?: string) => {
     if (!confirm('Are you sure you want to delete this product?')) return;
     try {
-      await fetch(`/api/admin/products/${slug}`, { method: 'DELETE' });
+      const deleteKey = slug || id;
+      await fetch(`/api/admin/products/${deleteKey}`, { method: 'DELETE' });
       fetchProducts();
     } catch (error) {
       console.error('Error deleting', error);
@@ -91,10 +92,10 @@ export default function AdminProductsPage() {
                   </td>
                   <td className="p-4 text-right">
                     <div className="flex justify-end gap-2">
-                      <Link href={`/admin/products/${product.slug}`} className="p-2 text-foreground/70 hover:text-accent transition-colors">
+                      <Link href={`/admin/products/${product.slug || product.id}`} className="p-2 text-foreground/70 hover:text-accent transition-colors">
                         <Edit className="w-4 h-4" />
                       </Link>
-                      <button onClick={() => handleDelete(product.slug)} className="p-2 text-foreground/70 hover:text-red-500 transition-colors">
+                      <button onClick={() => handleDelete(product.id, product.slug)} className="p-2 text-foreground/70 hover:text-red-500 transition-colors">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>

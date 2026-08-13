@@ -10,8 +10,12 @@ export async function PUT(request: Request, { params }: { params: Promise<{ slug
     
     delete data._id; // Prevent updating immutable field
 
+    if (!data.slug && data.name) {
+      data.slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+
     await db.collection('products').updateOne(
-      { slug },
+      { $or: [{ slug }, { id: slug }] },
       { $set: data }
     );
     
@@ -30,7 +34,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ s
     const { slug } = await params;
     const db = await getDb();
     
-    await db.collection('products').deleteOne({ slug });
+    await db.collection('products').deleteOne({ $or: [{ slug }, { id: slug }] });
     
     // Revalidate cached paths
     revalidatePath('/services');

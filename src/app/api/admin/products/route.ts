@@ -24,6 +24,11 @@ export async function POST(request: Request) {
       data.id = `prod_${Date.now()}`;
     }
     
+    // Auto-generate slug if missing
+    if (!data.slug && data.name) {
+      data.slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+    
     await db.collection('products').insertOne(data);
     
     // Revalidate cached paths

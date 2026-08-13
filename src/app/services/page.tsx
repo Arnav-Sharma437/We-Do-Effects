@@ -52,7 +52,7 @@ export default async function ServicesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {products.map((product) => (
                 <Link 
-                  href={`/services/${product.slug}`} 
+                  href={`/services/${product.slug || product.id}`} 
                   key={product.id}
                   className="group flex flex-col bg-surface/30 border border-border/10 rounded-2xl overflow-hidden hover:border-accent/50 transition-all duration-300"
                 >
