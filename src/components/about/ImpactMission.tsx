@@ -37,7 +37,7 @@ export const ImpactMission = () => {
             </h3>
             <div className="w-12 h-[2px] bg-accent mb-6" />
             <p className="text-base md:text-lg text-foreground/80 font-sans leading-relaxed">
-              To put your brand at the top of your particular industry through a flawless mix of new and old-age tactics regarding innovative digital strategies with traditional marketing methods. We believe that true marketing is beyond merely seeing really prominently. True marketing happens when one has made a connection with the audience such that long-lasting success can unfold. We're among the agencies that do not just make campaigns; we make experiences that provide engagement, inspiration, and conversion.
+              We don&apos;t just build campaigns; we construct brand architectures that dominate markets. Our mission is to partner with ambitious businesses and transform them into industry leaders through uncompromising design, strategic marketing, and cinematic media production.g methods. We believe that true marketing is beyond merely seeing really prominently. True marketing happens when one has made a connection with the audience such that long-lasting success can unfold. We&apos;re among the agencies that do not just make campaigns; we make experiences that provide engagement, inspiration, and conversion.
             </p>
           </motion.div>
 

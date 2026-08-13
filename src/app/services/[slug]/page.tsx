@@ -45,7 +45,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                   {product.description}
                 </p>
 
-                <h3 className="text-2xl font-serif font-bold text-foreground mb-6">What's Included</h3>
+                <h3 className="text-2xl font-serif font-bold text-foreground mb-6">What&apos;s Included</h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {product.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3 bg-surface/30 p-4 rounded-xl border border-border/5">

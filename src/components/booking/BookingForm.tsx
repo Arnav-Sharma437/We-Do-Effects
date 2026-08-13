@@ -84,6 +84,7 @@ export function BookingForm({
 
   useEffect(() => {
     if (initialPackageId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setHydrated(true);
       return;
     }

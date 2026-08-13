@@ -29,10 +29,10 @@ export const WhoWeAre = () => {
             className="w-full md:w-2/3"
           >
             <p className="text-lg md:text-xl text-foreground/80 font-sans leading-relaxed mb-6">
-              "Attention-wise, videos always come first, especially in a digital market filled with short attention spans and an overflow of content. From 15-second spots to TV commercials, the video takes the client's message and turns it into something even more easily remembered, building a great rapport for the brand itself."
+              &quot;Attention-wise, videos always come first, especially in a digital market filled with short attention spans and an overflow of content. From 15-second spots to TV commercials, the video takes the client&apos;s message and turns it into something even more easily remembered, building a great rapport for the brand itself.&quot;
             </p>
             <p className="text-base text-foreground/70 font-sans leading-relaxed">
-              We help companies preserve and innovate digital strategies incorporated creatively in advertising themes that blend today's influences with traditional marketing approaches. Deep knowledge of constantly shifting realities, a team of passionate experts, and individual solutions that drive growth, visibility enhancement, and meaningful relationships with customers is what the company provides.
+              We help companies preserve and innovate digital strategies incorporated creatively in advertising themes that blend today&apos;s influences with traditional marketing approaches. Deep knowledge of constantly shifting realities, a team of passionate experts, and individual solutions that drive growth, visibility enhancement, and meaningful relationships with customers is what the company provides.
             </p>
           </motion.div>
 

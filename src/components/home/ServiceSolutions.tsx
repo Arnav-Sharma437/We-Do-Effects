@@ -13,7 +13,27 @@ export const ServiceSolutions = () => {
   const digitalGrowth = services.filter(s => s.category === 'Digital Growth');
   const mediaProduction = services.filter(s => s.category === 'Media & Production');
 
-  const ServiceGroup = ({ title, items, index }: { title: string, items: typeof services, index: number }) => (
+  return (
+    <Section spacing="xl" className="bg-background overflow-hidden relative">
+      <div className="max-w-4xl mb-32 relative z-10 px-4 sm:px-0">
+        <h2 className="text-xs font-bold tracking-[0.3em] text-accent uppercase mb-6">Our Expertise</h2>
+        <h3 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold uppercase text-foreground leading-[1.05] tracking-tight mb-8 max-w-[800px]">
+          Comprehensive solutions for ambitious growth.
+        </h3>
+      </div>
+
+      <div className="px-4 sm:px-0">
+        <ServiceGroup index={0} title="Brand & Design" items={brandDesign} />
+        <ServiceGroup index={1} title="Digital Growth" items={digitalGrowth} />
+        <ServiceGroup index={2} title="Media & Production" items={mediaProduction} />
+      </div>
+    </Section>
+  );
+};
+
+const ServiceGroup = ({ title, items, index }: { title: string, items: typeof services, index: number }) => {
+  const prefersReducedMotion = useReducedMotion();
+  return (
     <div className="mb-32 md:mb-48 last:mb-0 relative">
       {/* Refined Ghost Typography - Pushed to the right and made extremely subtle */}
       <div 
@@ -71,22 +91,5 @@ export const ServiceSolutions = () => {
         </div>
       </div>
     </div>
-  );
-
-  return (
-    <Section spacing="xl" className="bg-background overflow-hidden relative">
-      <div className="max-w-4xl mb-32 relative z-10 px-4 sm:px-0">
-        <h2 className="text-xs font-bold tracking-[0.3em] text-accent uppercase mb-6">Our Expertise</h2>
-        <h3 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold uppercase text-foreground leading-[1.05] tracking-tight mb-8 max-w-[800px]">
-          Comprehensive solutions for ambitious growth.
-        </h3>
-      </div>
-
-      <div className="px-4 sm:px-0">
-        <ServiceGroup index={0} title="Brand & Design" items={brandDesign} />
-        <ServiceGroup index={1} title="Digital Growth" items={digitalGrowth} />
-        <ServiceGroup index={2} title="Media & Production" items={mediaProduction} />
-      </div>
-    </Section>
   );
 };

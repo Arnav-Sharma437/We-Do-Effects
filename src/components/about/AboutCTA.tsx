@@ -14,12 +14,10 @@ export const AboutCTA = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-5xl font-serif uppercase tracking-tight text-foreground mb-6">
-            Ready to create an <span className="text-accent italic">effect</span>?
-          </h2>
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold uppercase tracking-tight text-white mb-6">Let&apos;s build something extraordinary.</h2>
           
           <p className="text-lg md:text-xl text-foreground/80 font-sans leading-relaxed mb-10 max-w-2xl mx-auto">
-            Let's build a stronger, more visible, and highly engaging presence for your brand.
+            Let&apos;s build a stronger, more visible, and highly engaging presence for your brand.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

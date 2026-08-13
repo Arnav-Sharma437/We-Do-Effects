@@ -30,16 +30,16 @@ export const FinalCTA = () => {
         className="max-w-5xl mx-auto text-center relative z-10 px-4 sm:px-6"
       >
         <span className="text-[11px] font-bold tracking-[0.3em] text-accent uppercase mb-8 block">
-          Let's Collaborate
+          Let&apos;s Collaborate
         </span>
         
-        <h2 className="text-5xl md:text-7xl lg:text-[7rem] font-display font-bold uppercase tracking-tighter text-foreground mb-8 leading-[0.95]">
-          Have a project<br />
+        <h2 className="text-6xl md:text-8xl lg:text-[10rem] font-display font-bold uppercase tracking-tighter text-white mb-8 leading-[0.9]">
+          Let&apos;s Build<br />
           <span className="text-accent italic font-normal">in mind?</span>
         </h2>
         
         <p className="text-[16px] md:text-[18px] text-muted mb-12 leading-relaxed max-w-2xl mx-auto font-sans">
-          Tell us what you're trying to achieve. We'll help you define the next steps, timeline, and investment required to make it happen.
+          Stop settling for average. It&apos;s time to transform your brand into an industry leader. We&apos;re ready when you are.
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center gap-6 w-full sm:w-auto">
