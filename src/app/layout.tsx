@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto, Tenor_Sans, Oswald } from "next/font/google";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -33,8 +34,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${roboto.variable} ${tenorSans.variable} ${oswald.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-accent selection:text-background">{children}</body>
+    <html lang="en" suppressHydrationWarning className={`${roboto.variable} ${tenorSans.variable} ${oswald.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-accent selection:text-background">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

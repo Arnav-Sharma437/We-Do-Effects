@@ -15,6 +15,18 @@
 }
 
 :root {
+  /* Premium Warm Cream Light Mode */
+  --background: #FDFBF7;
+  --surface: #F5F2EB;
+  --surface-elevated: #EAE5D9;
+  --foreground: #1A1A1A;
+  --muted: #5C5C5C;
+  --accent: #B08D22;
+  --border: #DCD7CC;
+}
+
+.dark {
+  /* Original Dark Cinematic Mode */
   --background: #090909;
   --surface: #131313;
   --surface-elevated: #1e1e1e;

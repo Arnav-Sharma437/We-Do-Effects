@@ -6,7 +6,7 @@ import { Section } from '@/components/layout/Section';
 
 export const ImpactMission = () => {
   return (
-    <Section spacing="xl" className="bg-[#111111] relative overflow-hidden border-t border-border/10">
+    <Section spacing="xl" className="bg-surface relative overflow-hidden border-t border-border/10">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { navigation } from '@/data/navigation';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 export const Header = () => {
   return (
@@ -30,6 +31,7 @@ export const Header = () => {
 
         {/* Desktop CTA & Mobile Toggle */}
         <div className="flex items-center gap-4">
+          <ThemeToggle />
           <div className="hidden md:flex items-center">
             <Button asChild className="h-10 px-6 rounded-none text-[11px] font-bold uppercase tracking-widest bg-foreground text-background hover:bg-foreground/90 transition-colors flex items-center gap-2">
               <Link href="/book">

@@ -17,7 +17,7 @@ export const ImageTextSplit = () => {
   const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <Section spacing="none" className="bg-[#151515] relative overflow-hidden border-t border-border/10">
+    <Section spacing="none" className="bg-surface-elevated relative overflow-hidden border-t border-border/10">
       <div className="flex flex-col lg:flex-row min-h-[70vh]">
         
         {/* Left: Image with Parallax */}
