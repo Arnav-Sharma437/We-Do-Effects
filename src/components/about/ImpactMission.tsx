@@ -6,7 +6,7 @@ import { Section } from '@/components/layout/Section';
 
 export const ImpactMission = () => {
   return (
-    <Section spacing="xl" className="bg-surface relative overflow-hidden border-t border-border/10">
+    <Section spacing="xl" className="bg-[#111111] relative overflow-hidden border-t border-border/10">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
@@ -17,16 +17,21 @@ export const ImpactMission = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative bg-background border border-border/40 p-8 md:p-16 lg:p-20 overflow-hidden group"
+            className="relative bg-background border border-border/20 p-8 md:p-16 lg:p-20 overflow-hidden group hover:border-accent/40 transition-colors duration-500"
           >
             {/* Background Typography */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none overflow-hidden z-0">
-              <span className="text-[15vw] lg:text-[10vw] font-serif font-bold text-white group-hover:scale-105 transition-transform duration-1000 ease-out">
+            <div className="absolute top-0 right-0 p-8 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none select-none z-0">
+              <span className="text-8xl md:text-[12rem] font-serif font-bold text-white leading-none">
+                01
+              </span>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center opacity-[0.015] pointer-events-none select-none overflow-hidden z-0">
+              <span className="text-[20vw] lg:text-[15vw] font-serif font-bold text-white group-hover:scale-105 transition-transform duration-1000 ease-out">
                 IMPACT
               </span>
             </div>
 
-            <div className="relative z-10">
+            <div className="relative z-10 group-hover:-translate-y-1 transition-transform duration-500">
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-[1px] bg-accent" />
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground uppercase tracking-tight">
@@ -45,16 +50,21 @@ export const ImpactMission = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="relative bg-background border border-border/40 p-8 md:p-16 lg:p-20 overflow-hidden group"
+            className="relative bg-background border border-border/20 p-8 md:p-16 lg:p-20 overflow-hidden group hover:border-accent/40 transition-colors duration-500"
           >
             {/* Background Typography */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none overflow-hidden z-0">
-              <span className="text-[15vw] lg:text-[10vw] font-serif font-bold text-white group-hover:scale-105 transition-transform duration-1000 ease-out">
+            <div className="absolute top-0 right-0 p-8 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none select-none z-0">
+              <span className="text-8xl md:text-[12rem] font-serif font-bold text-white leading-none">
+                02
+              </span>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center opacity-[0.015] pointer-events-none select-none overflow-hidden z-0">
+              <span className="text-[20vw] lg:text-[15vw] font-serif font-bold text-white group-hover:scale-105 transition-transform duration-1000 ease-out">
                 MISSION
               </span>
             </div>
 
-            <div className="relative z-10">
+            <div className="relative z-10 group-hover:-translate-y-1 transition-transform duration-500">
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-[1px] bg-accent" />
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground uppercase tracking-tight">

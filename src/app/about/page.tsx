@@ -2,9 +2,12 @@ import React from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AboutHero } from '@/components/about/AboutHero';
+import { IntroSplit } from '@/components/about/IntroSplit';
+import { VisualBreak } from '@/components/about/VisualBreak';
 import { WhoWeAre } from '@/components/about/WhoWeAre';
 import { WhatWeDo } from '@/components/about/WhatWeDo';
 import { ImpactMission } from '@/components/about/ImpactMission';
+import { ImageTextSplit } from '@/components/about/ImageTextSplit';
 import { AboutCTA } from '@/components/about/AboutCTA';
 
 export const metadata = {
@@ -18,19 +21,30 @@ export default function AboutPage() {
       <Header />
       <main className="flex-1 flex flex-col bg-background overflow-hidden selection:bg-accent selection:text-background">
         
-        {/* 01 - Hero & Intro */}
         <AboutHero />
         
-        {/* 02 - Who We Are */}
+        <IntroSplit />
+        
+        <VisualBreak 
+          imageSrc="/assets/about/action-break.jpg" 
+          imageAlt="Creative marketing studio in action" 
+          text={<>CREATIVE THINKING,<br />BUILT TO MOVE BRANDS.</>}
+        />
+        
         <WhoWeAre />
         
-        {/* 03 - What We Do (Services) */}
         <WhatWeDo />
         
-        {/* 04 - Impact & Mission */}
+        <VisualBreak 
+          imageSrc="/assets/about/strategy-break.jpg" 
+          imageAlt="From strategy to execution" 
+          text={<>FROM IDEA<br />TO EXECUTION.</>}
+        />
+        
         <ImpactMission />
         
-        {/* 05 - CTA */}
+        <ImageTextSplit />
+        
         <AboutCTA />
         
       </main>
