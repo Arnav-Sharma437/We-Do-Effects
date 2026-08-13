@@ -29,16 +29,7 @@ export const navigation = {
       ]
     },
     { name: 'Work', href: '/work' },
-    { 
-      name: 'Pricing', 
-      href: '/pricing',
-      dropdown: [
-        { name: 'Social Media Content Pricing', href: '/pricing#social-media' },
-        { name: 'Music Video Pricing', href: '/pricing#music-video' },
-        { name: 'Short Films Pricing', href: '/pricing#short-films' },
-        { name: 'Documentary Pricing', href: '/pricing#documentary' },
-      ]
-    },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'Book', href: '/book' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
