@@ -7,7 +7,7 @@ import { AnimatedSun } from './AnimatedSun';
 
 export const IntroSplit = () => {
   return (
-    <Section spacing="xl" className="bg-surface relative overflow-hidden border-b border-border/10">
+    <Section spacing="lg" className="bg-surface relative overflow-hidden border-b border-border/10">
       
       {/* Background Ambience */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none z-0" />

@@ -6,7 +6,7 @@ import { Section } from '@/components/layout/Section';
 
 export const WhoWeAre = () => {
   return (
-    <Section spacing="xl" className="relative overflow-hidden bg-background border-b border-border/10">
+    <Section spacing="lg" className="relative overflow-hidden bg-background border-b border-border/10">
       
       {/* Oversized Background Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full overflow-hidden pointer-events-none select-none z-0 flex justify-center opacity-[0.02]">

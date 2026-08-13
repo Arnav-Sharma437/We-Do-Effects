@@ -48,12 +48,12 @@ export const WhatWeDo = () => {
   const displayIndex = hoverIndex !== null ? hoverIndex : activeIndex;
 
   return (
-    <Section spacing="xl" className="relative overflow-hidden border-t border-border/10 bg-surface">
+    <Section spacing="lg" className="relative overflow-hidden border-t border-border/10 bg-surface">
       
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
         
         {/* Section Intro */}
-        <div className="max-w-3xl mb-16 md:mb-24">
+        <div className="max-w-3xl mb-12 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export const WhatWeDo = () => {
             <div className="text-accent font-sans text-sm font-bold tracking-widest mb-4">
               02
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold uppercase tracking-tight text-foreground mb-8">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold uppercase tracking-tight text-foreground mb-6">
               WHAT WE DO?
             </h2>
           </motion.div>
@@ -71,7 +71,7 @@ export const WhatWeDo = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-muted font-sans font-light leading-relaxed"
+            className="text-lg md:text-xl text-foreground/80 font-sans leading-relaxed"
           >
             Our services cover all aspects of marketing so that your brand will receive maximum exposure and engagement with audiences on any platform:
           </motion.p>
@@ -116,7 +116,7 @@ export const WhatWeDo = () => {
                             transition={{ duration: 0.3 }}
                             className="overflow-hidden"
                           >
-                            <p className="text-muted font-sans font-light leading-relaxed mb-6 pr-8">
+                            <p className="text-foreground/80 font-sans leading-relaxed mb-6 pr-8">
                               {service.description}
                             </p>
                             <Link 
@@ -138,7 +138,7 @@ export const WhatWeDo = () => {
 
           {/* Right: Dynamic Image Viewer */}
           <div className="w-1/2 relative">
-            <div className="sticky top-32 w-full aspect-[4/5] overflow-hidden border border-border/20 bg-background">
+            <div className="sticky top-24 lg:top-32 w-full h-[60vh] max-h-[600px] overflow-hidden border border-border/20 bg-background rounded-lg shadow-xl">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={displayIndex}
