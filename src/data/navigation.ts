@@ -10,7 +10,7 @@ export const navigation = {
         { name: 'Video Marketing', href: '/services/video-marketing' },
         { name: 'Digital Marketing', href: '/services/digital-marketing' },
         { name: 'Website Design', href: '/services/website-design' },
-        { name: 'Graphic Designing', href: '/services/graphic-designing' },
+        { name: 'Graphic Designing', href: '/services/designing' },
         { name: 'SEO', href: '/services/seo' },
         { name: 'Branding', href: '/services/branding' },
       ]
