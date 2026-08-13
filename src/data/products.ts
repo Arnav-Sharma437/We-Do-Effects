@@ -68,7 +68,7 @@ export const products: Product[] = [
       "Custom UI/UX Design (Figma)",
       "Fully Responsive Development",
       "Basic SEO Setup",
-      "CMS Integration (WordPress/Next.js)"
+      "CMS Integration"
     ],
     addons: [
       { id: "addon_ecommerce", name: "E-Commerce Functionality", price: 1000 },
