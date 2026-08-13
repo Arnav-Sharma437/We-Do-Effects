@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getProductBySlug } from '@/data/products';
+import { getDb } from '@/lib/mongodb';
+import { Product } from '@/data/products';
 
 export async function POST(request: Request) {
   try {
@@ -10,11 +11,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Cart is empty.' }, { status: 400 });
     }
 
+    const db = await getDb();
+    const productsCollection = db.collection<Product>('products');
+
     // SERVER-SIDE PRICING VALIDATION
     let serverSubtotal = 0;
     
     for (const item of items) {
-      const realProduct = getProductBySlug(item.product.slug);
+      const realProduct = await productsCollection.findOne({ slug: item.product.slug });
       if (!realProduct) {
         return NextResponse.json({ error: `Product not found: ${item.product.name}` }, { status: 400 });
       }
@@ -36,17 +40,45 @@ export async function POST(request: Request) {
       serverSubtotal += (itemBasePrice + addonTotal) * (item.quantity || 1);
     }
 
-    // Custom Order Processing Logic goes here in the future
-    // e.g. Saving to custom DB, sending confirmation email via Resend, connecting to Stripe
-
+    const depositAmount = serverSubtotal * 0.5; // 50% deposit
     const orderId = `WDE-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+    const now = new Date();
 
-    // For now, we simulate a successful local order
-    console.info(`[CUSTOM ECOMMERCE] Received Order ${orderId} for ${email} | Validated Total: £${serverSubtotal}`);
+    // 1. Create/Update Customer Record
+    const customersCollection = db.collection('customers');
+    const customerRecord = await customersCollection.findOneAndUpdate(
+      { email },
+      { 
+        $set: {
+          name: `${firstName} ${lastName}`.trim(),
+          phone,
+          company: company || '',
+          updatedAt: now
+        },
+        $setOnInsert: { createdAt: now }
+      },
+      { upsert: true, returnDocument: 'after' }
+    );
+
+    // 2. Create Order Record
+    const ordersCollection = db.collection('orders');
+    await ordersCollection.insertOne({
+      orderId,
+      customerId: customerRecord?._id,
+      customerDetails: { firstName, lastName, email, phone, company },
+      items,
+      subtotal: serverSubtotal,
+      deposit: depositAmount,
+      total: serverSubtotal,
+      status: 'pending',
+      paymentStatus: 'pending',
+      notes: notes || '',
+      createdAt: now,
+      updatedAt: now
+    });
+
+    console.info(`[CUSTOM ECOMMERCE] Created Order ${orderId} in MongoDB for ${email} | Total: £${serverSubtotal}`);
     
-    // Fake processing time
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
     return NextResponse.json({ success: true, orderId });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

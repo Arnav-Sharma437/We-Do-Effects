@@ -1,17 +1,19 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { getProductBySlug } from '@/data/products';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ServiceHero } from '@/components/services/ServiceHero';
 import { ProductClient } from '@/components/cart/ProductClient';
 import { Check } from 'lucide-react';
+import { getDb } from '@/lib/mongodb';
+import { Product } from '@/data/products'; // Keep type definition
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   
-  // Directly fetch from our custom Next.js data architecture
-  const product = getProductBySlug(slug);
+  // Directly fetch from MongoDB
+  const db = await getDb();
+  const product = await db.collection<Product>('products').findOne({ slug });
 
   if (!product) {
     notFound();
@@ -60,7 +62,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
               {/* Cart/Pricing Sidebar */}
               <div className="lg:w-1/3">
-                <ProductClient product={product} />
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                <ProductClient product={product as any} />
               </div>
 
             </div>
